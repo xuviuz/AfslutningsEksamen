@@ -64,8 +64,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             //object[] parameters = 
-                            //var operationResult = Compiler.RunDll(runFuncDef.Name, runFuncDef.FunctionData);
-                            var operationResult = "RUN will be later";
+                            var operationResult = Compiler.RunDll(runFuncDef.Name, runFuncDef.FunctionData);
+                            //var operationResult = "RUN will be later";
                             //eventdata = new Common.DTO.EventDTO(res, wrapper.Clientid, wrapper.Messageid);
                             //Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 

@@ -1006,11 +1006,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
+      "projectUniqueName": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
       "projectName": "Monosoft.Common.Utils",
-      "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
+      "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\obj\\",
+      "outputPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

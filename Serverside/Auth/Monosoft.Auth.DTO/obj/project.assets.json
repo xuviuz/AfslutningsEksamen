@@ -1043,11 +1043,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj",
+      "projectUniqueName": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj",
       "projectName": "Monosoft.Auth.DTO",
-      "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj",
+      "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.DTO\\obj\\",
+      "outputPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Auth\\Monosoft.Auth.DTO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1066,11 +1066,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
+            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
+              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
+            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
+              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
             }
           }
         }

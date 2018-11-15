@@ -4545,11 +4545,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj",
+      "projectUniqueName": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj",
       "projectName": "Monosoft.Common.MessageQueue",
-      "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj",
+      "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj",
       "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.MessageQueue\\obj\\",
+      "outputPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.MessageQueue\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4568,11 +4568,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
+            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
+              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
+            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
+              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
             }
           }
         }

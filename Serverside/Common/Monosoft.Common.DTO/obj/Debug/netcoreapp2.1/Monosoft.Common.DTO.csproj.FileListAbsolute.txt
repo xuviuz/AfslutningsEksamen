@@ -36,3 +36,16 @@ E:\lektions\Last\MyRanch\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcore
 E:\lektions\Last\MyRanch\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CopyComplete
 E:\lektions\Last\MyRanch\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
 E:\lektions\Last\MyRanch\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.deps.json
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.dll
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.pdb
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.xml
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csprojAssemblyReference.cache
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CoreCompileInputs.cache
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.AssemblyInfoInputs.cache
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.AssemblyInfo.cs
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CopyComplete
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
+E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb

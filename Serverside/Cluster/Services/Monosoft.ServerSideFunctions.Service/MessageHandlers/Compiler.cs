@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 {
-    class Compiler
+    static class Compiler
     {
         private static string[] defaultNamespaces;
 
@@ -80,7 +80,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return res;
         }
 
-        public object RunDll(string functionName, object[] parameters)
+        public static object RunDll(string functionName, params object[] parameters)
         {
             string fileName = functionName + ".dll";
             var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
@@ -104,6 +104,54 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 Console.WriteLine(ex);
             }
             return result;
+        }
+
+        public static object[] ConvertToObjectArray(string inputString)
+        {
+            if (string.IsNullOrEmpty(inputString.Replace(" ", "")))
+            {
+                return new object[] { };
+            }
+            string[] tempArray = inputString.Split(",");
+            string variables = string.Empty;
+            string returnArray = string.Empty;
+            for (int i = 0; i < tempArray.Length; i++)
+            {
+                string[] item = tempArray[i].Split(":");
+                variables += item[0] + " value" + i.ToString() + " = " + item[1] + ";";
+                returnArray += i == 0 ? item[1] : ", " + item[1];
+            }
+
+            string testString2 = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + variables + " return new object[] { " + returnArray + " }; } } }";
+
+            string operationResult = CreateDll("GetArray", testString2);
+            Console.WriteLine(operationResult);
+
+            return RunGetArrayDll("GetArray", new object[] { });
+        }
+
+        private static object[] RunGetArrayDll(string functionName, object[] parameters)
+        {
+            string fileName = functionName + ".dll";
+            var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
+            object[] res = null;
+            try
+            {
+                var dll = Assembly.LoadFile(path);
+
+                foreach (Type type in dll.GetExportedTypes())
+                {
+                    dynamic c = Activator.CreateInstance(type);
+                    //int temp = c.Sum(2, 3);
+                    res = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, parameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return res;
         }
     }
 }
