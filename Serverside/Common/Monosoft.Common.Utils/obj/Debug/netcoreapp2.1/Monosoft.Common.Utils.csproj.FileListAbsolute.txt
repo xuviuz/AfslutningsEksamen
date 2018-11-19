@@ -34,3 +34,12 @@ E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.Utils\obj\Debug
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.AssemblyInfo.cs
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.dll
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.pdb
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.deps.json
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.dll
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.pdb
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.csprojAssemblyReference.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.csproj.CoreCompileInputs.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.AssemblyInfoInputs.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.AssemblyInfo.cs
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.dll
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.Utils\obj\Debug\netcoreapp2.1\Monosoft.Common.Utils.pdb

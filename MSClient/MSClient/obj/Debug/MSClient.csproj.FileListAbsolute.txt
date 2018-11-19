@@ -24,3 +24,16 @@ E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\Newtonsoft.Json.xml
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.csproj.CopyComplete
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.exe
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.pdb
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\bin\Debug\MSClient.exe.config
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\bin\Debug\MSClient.exe
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\bin\Debug\MSClient.pdb
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\bin\Debug\Newtonsoft.Json.dll
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\bin\Debug\Newtonsoft.Json.xml
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.csprojAssemblyReference.cache
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.Form1.resources
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.Properties.Resources.resources
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.csproj.GenerateResource.cache
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.csproj.CoreCompileInputs.cache
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.csproj.CopyComplete
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.exe
+C:\AFSLUTNINGSEKSAMEN\MSClient\MSClient\obj\Debug\MSClient.pdb

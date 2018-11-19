@@ -54,13 +54,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
             var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-            string res = "Failed";
+            string res = "Error whole creating " + functionName;
             try
             {
                 var result = compilation.Emit(path);
                 if (result.Success)
                 {
-                    res = "Succeed";
+                    res = functionName + " was created";
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return res;
         }
 
-        public object RunDll(string functionName, params object[] parameters)
+        public object RunDll(string functionName, object[] parameters)
         {
             string fileName = functionName + ".dll";
             var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
@@ -88,7 +88,9 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             object result = new object();
             try
             {
-                var dll = Assembly.LoadFile(path);
+
+                byte[] tempFileArray = File.ReadAllBytes(path);
+                var dll = Assembly.Load(tempFileArray);
 
                 foreach (Type type in dll.GetExportedTypes())
                 {
@@ -167,6 +169,75 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             }
             Console.WriteLine(res);
             return outputArray;
+        }
+
+        public bool DeleteFunc(string functionName)
+        {
+            bool returnBool = false;
+            if(File.Exists(functionName+".dll"))
+            {
+                File.Delete(functionName+".dll");
+                returnBool = true;
+            }
+
+            return returnBool;
+        }
+       public string UpdateDLL(string functionName, string functionString)
+        {
+
+            if(File.Exists(functionName+".dll"))
+            {
+                if(File.Exists(functionName + "BackUp.dll"))
+                {
+                    
+                    string hej = Directory.GetCurrentDirectory() + @"\"+ functionName;
+                    Directory.CreateDirectory(functionName);
+                    File.Move(functionName + "BackUp.dll", hej + @"\" + functionName + "BackUp" + (Directory.GetFiles(hej).Count() + 1) + ".dll");
+                    File.Move(functionName + ".dll", functionName + "BackUp.dll");
+                }
+                else
+                {
+                    File.Move(functionName + ".dll", functionName + "BackUp.dll");
+                }
+                
+
+                string fileName = functionName + ".dll";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+
+                SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
+
+                var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
+
+                string res = "Error whole updating " + functionName;
+                try
+                {
+                    var result = compilation.Emit(path);
+                    if (result.Success)
+                    {
+                        res = functionName + " was updated!";
+                    }
+                    else
+                    {
+                        IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                            diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+
+                        foreach (Diagnostic diagnostic in failures)
+                        {
+                            Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return res;
+            }
+            else
+            {
+                return "FUNCTION DOES NOT EXSIST!";
+            }
+            
         }
     }
 }

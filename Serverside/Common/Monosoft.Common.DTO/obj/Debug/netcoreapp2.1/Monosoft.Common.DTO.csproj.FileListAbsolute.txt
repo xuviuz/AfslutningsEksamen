@@ -49,3 +49,16 @@ E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\n
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CopyComplete
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
 E:\lektions\AfslutningsEksamen\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.deps.json
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.dll
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.pdb
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\bin\Debug\netcoreapp2.1\Monosoft.Common.Utils.xml
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csprojAssemblyReference.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CoreCompileInputs.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.AssemblyInfoInputs.cache
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.AssemblyInfo.cs
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.csproj.CopyComplete
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.dll
+C:\AFSLUTNINGSEKSAMEN\Serverside\Common\Monosoft.Common.DTO\obj\Debug\netcoreapp2.1\Monosoft.Common.DTO.pdb

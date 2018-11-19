@@ -1000,23 +1000,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\.nuget\\packages\\": {},
+    "C:\\Users\\krist\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
+      "projectUniqueName": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
       "projectName": "Monosoft.Common.Utils",
-      "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
-      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\obj\\",
+      "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj",
+      "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
+      "outputPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

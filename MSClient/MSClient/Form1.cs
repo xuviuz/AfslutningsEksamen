@@ -35,6 +35,12 @@ namespace MSClient
                 case "run":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
+                case "delete":
+                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text,form1.textBoxParams.Text);
+                    break;
+                case "update":
+                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    break;
                 default:
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
@@ -93,7 +99,7 @@ namespace MSClient
         private void comboBoxOperation_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxParams.Enabled = comboBoxOperation.SelectedItem.ToString() == "run" ? true : false;
-            textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "create" ? true : false;
+            textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "create" || comboBoxOperation.SelectedItem.ToString() == "update" ? true : false;
         }
     }
 }

@@ -3637,7 +3637,7 @@
       ]
     },
     "System.IO/4.3.0": {
-      "sha512": "OyspOic18vEyAYiw8A70mvd8OUETpyKFbXbR1ckM7pfOmd6g9Mcz9+a9ZcRjLJt2lzMXgsGmYvvs8pNGKWJ15Q==",
+      "sha512": "3qjaHvxQPDpSOYICjUoTsmoq5u6QJAFRUITgeT/4gqkF1bajbSmb1kwSxEA8AHlofqgcKJcM8udgieRNhaJ5Cg==",
       "type": "package",
       "path": "system.io/4.3.0",
       "files": [
@@ -4295,7 +4295,7 @@
       ]
     },
     "System.Reflection/4.3.0": {
-      "sha512": "9JmLhyN7QkF0m7ap0N3FMJBQ0rSQIj3pvpVu6JDq9vxtEcJJETwLOry9D2f8N5/hBxPk5RX6PVIxfYtn3rxDMA==",
+      "sha512": "KMiAFoW7MfJGa9nDFNcfu+FpEdiHpWgTcS2HdMpDvt9saK3y/G4GwprPyzqjFH9NTaGPQeWNHU+iDlDILj96aQ==",
       "type": "package",
       "path": "system.reflection/4.3.0",
       "files": [
@@ -4569,7 +4569,7 @@
       ]
     },
     "System.Reflection.Primitives/4.3.0": {
-      "sha512": "4s7zmA1QuOYi77dEk+D0B6pxU7pjooyLcOkAZQHTZhsKxlQ6K7H6dzx2UOAeWcv9eMPBv0NZ2qQhVVtsQo+6oQ==",
+      "sha512": "5RXItQz5As4xN2/YUDxdpsEkMhvw3e6aNveFXUn4Hl/udNTCNhnKp8lT9fnc3MhvGKh1baak5CovpuQUXHAlIA==",
       "type": "package",
       "path": "system.reflection.primitives/4.3.0",
       "files": [
@@ -4731,7 +4731,7 @@
       ]
     },
     "System.Runtime/4.3.0": {
-      "sha512": "fGl83BX9n/nLk0RsGKPnQpYWC1/Q5tebdyOLs76B/9zzHwjEgD4gInTLQN+KIp1r71EbAAN+ZDP5RkAs+dIrvA==",
+      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
       "type": "package",
       "path": "system.runtime/4.3.0",
       "files": [
@@ -5456,7 +5456,7 @@
       ]
     },
     "System.Text.Encoding/4.3.0": {
-      "sha512": "rpg3UStYXRabrFlPVm4iJ8Jmn06LJ0aQnhJ38JPmrZBHmeoT55JxKdQovhevlCREuqNZNELN6zuN0TxR2zG0gw==",
+      "sha512": "BiIg+KWaSDOITze6jGQynxg64naAPtqGHBwDrLaCtixsa5bKiR8dpPOHA7ge3C0JJQizJE+sfkz1wV+BAKAYZw==",
       "type": "package",
       "path": "system.text.encoding/4.3.0",
       "files": [
@@ -5776,7 +5776,7 @@
       ]
     },
     "System.Threading.Tasks/4.3.0": {
-      "sha512": "f8zoYiaDBs8Qos3if7Z8ALF9NKB2uLSkFYBDeI/DV9/T7btwNK6Tb9m1rO1K8YcHYLAnMF7gKcs28a5DD0hWvw==",
+      "sha512": "LbSxKEdOUhVe8BezB/9uOGGppt+nZf6e1VFyw6v3DN6lqitm0OSn2uXMOdtP0M3W4iMcqcivm2J6UgqiwwnXiA==",
       "type": "package",
       "path": "system.threading.tasks/4.3.0",
       "files": [
@@ -6336,23 +6336,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\.nuget\\packages\\": {},
+    "C:\\Users\\krist\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\Monosoft.ServerSideFunctions.Service.csproj",
+      "projectUniqueName": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\Monosoft.ServerSideFunctions.Service.csproj",
       "projectName": "Monosoft.ServerSideFunctions.Service",
-      "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\Monosoft.ServerSideFunctions.Service.csproj",
-      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\obj\\",
+      "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\Monosoft.ServerSideFunctions.Service.csproj",
+      "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
+      "outputPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Cluster\\Services\\Monosoft.ServerSideFunctions.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6365,17 +6365,17 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
-              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
             },
-            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj": {
-              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj"
             },
-            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj": {
-              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj"
             },
-            "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
-              "projectPath": "E:\\lektions\\AfslutningsEksamen\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
             }
           }
         }
