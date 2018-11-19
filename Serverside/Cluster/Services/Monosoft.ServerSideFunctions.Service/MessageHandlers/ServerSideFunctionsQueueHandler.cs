@@ -21,6 +21,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             //CallContext cc = new CallContext(wrapper.OrgContext, new Common.DTO.Token() { Tokenid = wrapper.UserContextToken, Scope = GlobalValues.Scope }, wrapper.IssuedDate);
             var operation = topicparts[1];
             Common.DTO.EventDTO eventdata = null;
+            Compiler compiler = new Compiler();
 
             if (true) // cc.IsServerSideFunctionsAdmin
             {
@@ -31,11 +32,11 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "create":
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            // string createResult = Compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData);
+                            // string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData);
                             string createResult = "CREATE result will be later";
-                            //eventdata = new Common.DTO.EventDTO(res, wrapper.Clientid, wrapper.Messageid);
-                            //Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
-                            
+                            eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            /*
                             if (createResult != null)
                             {
                                 return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, createResult);
@@ -44,7 +45,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             {
                                 return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, createResult);
                             }
-
+                            */
                             break;
                         case "delete":
                             var deleteResult = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
@@ -64,7 +65,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             //object[] parameters = 
-                            var operationResult = Compiler.RunDll(runFuncDef.Name, runFuncDef.FunctionData);
+                            var operationResult = compiler.RunDll(runFuncDef.Name, runFuncDef.FunctionData);
                             //var operationResult = "RUN will be later";
                             //eventdata = new Common.DTO.EventDTO(res, wrapper.Clientid, wrapper.Messageid);
                             //Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);

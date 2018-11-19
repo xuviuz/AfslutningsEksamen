@@ -16,3 +16,11 @@ E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.Form1.resour
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.Properties.Resources.resources
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.csproj.GenerateResource.cache
 E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.csproj.CoreCompileInputs.cache
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\MSClient.exe.config
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\MSClient.exe
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\MSClient.pdb
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\Newtonsoft.Json.dll
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\bin\Debug\Newtonsoft.Json.xml
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.csproj.CopyComplete
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.exe
+E:\lektions\AfslutningsEksamen\MSClient\MSClient\obj\Debug\MSClient.pdb

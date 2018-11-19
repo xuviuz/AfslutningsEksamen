@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 {
-    static class Compiler
+    class Compiler
     {
         private static string[] defaultNamespaces;
 
@@ -19,7 +19,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
         private static CSharpCompilationOptions options;
 
 
-        static Compiler()
+        public Compiler()
         {
             defaultNamespaces = new[]
            {
@@ -45,7 +45,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     .WithUsings(defaultNamespaces);
         }
 
-        public static string CreateDll(string functionName, string functionString)
+        public string CreateDll(string functionName, string functionString)
         {
             string fileName = functionName + ".dll";
             var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
@@ -80,7 +80,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return res;
         }
 
-        public static object RunDll(string functionName, params object[] parameters)
+        public object RunDll(string functionName, params object[] parameters)
         {
             string fileName = functionName + ".dll";
             var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
@@ -106,7 +106,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return result;
         }
 
-        public static object[] ConvertToObjectArray(string inputString)
+        public object[] ConvertToObjectArray(string inputString)
         {
             if (string.IsNullOrEmpty(inputString.Replace(" ", "")))
             {
@@ -121,37 +121,52 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 variables += item[0] + " value" + i.ToString() + " = " + item[1] + ";";
                 returnArray += i == 0 ? item[1] : ", " + item[1];
             }
+            string paramFunctionString = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + variables + " return new object[] { " + returnArray + " }; } } }";
 
-            string testString2 = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + variables + " return new object[] { " + returnArray + " }; } } }";
-
-            string operationResult = CreateDll("GetArray", testString2);
-            Console.WriteLine(operationResult);
-
-            return RunGetArrayDll("GetArray", new object[] { });
+            return GetParametersArray(paramFunctionString);
         }
 
-        private static object[] RunGetArrayDll(string functionName, object[] parameters)
+        public object[] GetParametersArray(string inputString)
         {
+            string functionName = "GetArray";
             string fileName = functionName + ".dll";
-            var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 
-            object[] res = null;
-            try
+            SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(inputString);
+
+            var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
+
+            string res = "Failed";
+            object[] outputArray = new object[] { };
+
+            using (var ms = new MemoryStream())
             {
-                var dll = Assembly.LoadFile(path);
+                var result = compilation.Emit(ms);
 
-                foreach (Type type in dll.GetExportedTypes())
+                if (result.Success)
                 {
-                    dynamic c = Activator.CreateInstance(type);
-                    //int temp = c.Sum(2, 3);
-                    res = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, parameters);
+                    res = "Succeed";
+                    ms.Seek(0, SeekOrigin.Begin);
+
+                    var dll = Assembly.Load(ms.ToArray());
+                    foreach (Type type in dll.GetExportedTypes())
+                    {
+                        dynamic c = Activator.CreateInstance(type);
+                        outputArray = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, new object[] { });
+                    }
+                }
+                else
+                {
+                    IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                        diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+
+                    foreach (Diagnostic diagnostic in failures)
+                    {
+                        Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return res;
+            Console.WriteLine(res);
+            return outputArray;
         }
     }
 }
