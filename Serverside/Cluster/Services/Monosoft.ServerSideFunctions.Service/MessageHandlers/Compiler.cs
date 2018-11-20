@@ -48,8 +48,9 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public string CreateDll(string functionName, string functionString)
         {
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName);
             string fileName = functionName + ".dll";
-            var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
 
             SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
 
@@ -186,7 +187,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
        public string UpdateDLL(string functionName, string functionString)
         {
 
-            if(File.Exists(functionName+".dll"))
+            if(File.Exists(Directory.GetCurrentDirectory()+ @"\Dller\" + functionName + @"\" + functionName+".dll"))
             {
                 if(File.Exists(functionName + "BackUp.dll"))
                 {
@@ -255,6 +256,12 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
            
 
+        }
+        public string ReadAllDll()
+        {
+
+
+            return "";
         }
     }
 }

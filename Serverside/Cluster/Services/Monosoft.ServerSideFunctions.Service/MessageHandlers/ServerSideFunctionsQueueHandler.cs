@@ -40,7 +40,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             if (createResult != "Error whole creating" + createFuncDef.Name)
                             {
-                                File.WriteAllText(createFuncDef.Name + ".json", JsonConvert.SerializeObject(createFuncDef));
+                                File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + createFuncDef.Name + @"\" + createFuncDef.Name + ".json", JsonConvert.SerializeObject(createFuncDef));
 
                             }
                             //string createResult = "CREATE result will be later";
