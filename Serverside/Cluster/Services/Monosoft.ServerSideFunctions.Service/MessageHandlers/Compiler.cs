@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -238,6 +239,22 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 return "FUNCTION DOES NOT EXSIST!";
             }
             
+        }
+
+        public string ReadDll(string name)
+        {
+            if(File.Exists(name+".json"))
+            {
+                DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(name + ".json"));
+                return func.FunctionData;
+            }
+            else
+            {
+                return "NAVN GIVET FUNCTION FINDES IKKE!";
+            }
+
+           
+
         }
     }
 }

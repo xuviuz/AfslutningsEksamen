@@ -1,7 +1,11 @@
 ﻿using Monosoft.Common.DTO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using Newtonsoft;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 {
@@ -33,10 +37,16 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData);
+
+                            if (createResult != "Error whole creating" + createFuncDef.Name)
+                            {
+                                File.WriteAllText(createFuncDef.Name + ".json", JsonConvert.SerializeObject(createFuncDef));
+
+                            }
                             //string createResult = "CREATE result will be later";
                             //eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
-                            
+
                             if (createResult != null)
                             {
                                 return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, createResult);
@@ -45,7 +55,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             {
                                 return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, createResult);
                             }
-                            
+
                             break;
                         case "delete":
                             var deleteResult = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
@@ -87,15 +97,28 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             break;
                         case "read":
-                            // check if function isExist
-                            Console.WriteLine("read");
+
+                            var readFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+
+                            string readResult = compiler.ReadDll(readFunc.Name);
+
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+
+                            if (readResult != null)
+                            {
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, readResult);
+                            }
+                            else
+                            {
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, readResult);
+                            }
 
                             break;
                         case "run":
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             object[] parameters = compiler.ConvertToObjectArray(runFuncDef.FunctionData);
-                            var operationResult = compiler.RunDll(runFuncDef.Name,parameters);
+                            var operationResult = compiler.RunDll(runFuncDef.Name, parameters);
                             //var operationResult = "RUN will be later";
                             //eventdata = new Common.DTO.EventDTO(res, wrapper.Clientid, wrapper.Messageid);
                             //Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
