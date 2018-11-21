@@ -43,8 +43,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                                 File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + createFuncDef.Name + @"\" + createFuncDef.Name + ".json", JsonConvert.SerializeObject(createFuncDef));
 
                             }
-                            //string createResult = "CREATE result will be later";
-                            //eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
+
+                            eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 
                             if (createResult != null)
@@ -68,6 +68,10 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             {
                                 deletedResult = "FILE DOES NOT EXIST! MAYBE THERE WAS A TYPO?";
                             }
+
+                            eventdata = new Common.DTO.EventDTO(deletedResult, wrapper.Clientid, wrapper.Messageid);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+
                             if (deletedResult != "ERROR!")
                             {
                                 return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, deletedResult);
@@ -82,8 +86,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var updateFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string updateResult = compiler.UpdateDLL(updateFuncDef.Name, updateFuncDef.FunctionData);
-                            //string createResult = "CREATE result will be later";
-                            //eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
+
+                            eventdata = new Common.DTO.EventDTO(updateResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 
                             if (updateResult != null)
@@ -101,8 +105,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var readFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string readResult = compiler.ReadDll(readFunc.Name);
-                            compiler.ReadAllDll();
 
+                            eventdata = new Common.DTO.EventDTO(readResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 
                             if (readResult != null)
@@ -115,14 +119,34 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             }
 
                             break;
+                        case "readall":
+
+                            var readallFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+
+                            string readallResult = compiler.ReadAllDll();
+
+                            eventdata = new Common.DTO.EventDTO(readallResult, wrapper.Clientid, wrapper.Messageid);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+
+                            if (readallResult != null)
+                            {
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, readallResult);
+                            }
+                            else
+                            {
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, readallResult);
+                            }
+
+
+                            break;
                         case "run":
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             object[] parameters = compiler.ConvertToObjectArray(runFuncDef.FunctionData);
                             var operationResult = compiler.RunDll(runFuncDef.Name, parameters);
-                            //var operationResult = "RUN will be later";
-                            //eventdata = new Common.DTO.EventDTO(res, wrapper.Clientid, wrapper.Messageid);
-                            //Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+
+                            eventdata = new Common.DTO.EventDTO(operationResult, wrapper.Clientid, wrapper.Messageid);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 
                             if (operationResult != null)
                             {

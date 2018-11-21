@@ -41,6 +41,9 @@ namespace MSClient
                 case "update":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
+                case "readall":
+                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
+                    break;
                 default:
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
@@ -100,6 +103,11 @@ namespace MSClient
         {
             textBoxParams.Enabled = comboBoxOperation.SelectedItem.ToString() == "run" ? true : false;
             textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "create" || comboBoxOperation.SelectedItem.ToString() == "update" ? true : false;
+            readallCombo.Enabled = comboBoxOperation.SelectedItem.ToString() == "read" ? true : false;
+            if(comboBoxOperation.SelectedItem.ToString() == "read")
+            {
+
+            }
         }
     }
 }

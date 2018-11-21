@@ -42,6 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxParams = new System.Windows.Forms.TextBox();
+            this.readallCombo = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxURL
@@ -124,11 +126,13 @@
             // comboBoxOperation
             // 
             this.comboBoxOperation.FormattingEnabled = true;
+            this.comboBoxOperation.IntegralHeight = false;
             this.comboBoxOperation.Items.AddRange(new object[] {
             "create",
             "delete",
             "update",
             "read",
+            "readall",
             "run"});
             this.comboBoxOperation.Location = new System.Drawing.Point(27, 491);
             this.comboBoxOperation.Name = "comboBoxOperation";
@@ -172,11 +176,30 @@
             this.textBoxParams.Size = new System.Drawing.Size(546, 20);
             this.textBoxParams.TabIndex = 12;
             // 
+            // readallCombo
+            // 
+            this.readallCombo.FormattingEnabled = true;
+            this.readallCombo.Location = new System.Drawing.Point(27, 202);
+            this.readallCombo.Name = "readallCombo";
+            this.readallCombo.Size = new System.Drawing.Size(546, 21);
+            this.readallCombo.TabIndex = 14;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(601, 205);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Vælg funktion";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 524);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.readallCombo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxParams);
             this.Controls.Add(this.label5);
@@ -214,6 +237,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxParams;
+        private System.Windows.Forms.ComboBox readallCombo;
+        private System.Windows.Forms.Label label7;
     }
 }
 

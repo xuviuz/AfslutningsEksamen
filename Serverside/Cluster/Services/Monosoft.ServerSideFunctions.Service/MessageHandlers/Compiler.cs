@@ -249,19 +249,19 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
 
         }
-        public string[] ReadAllDll()
+        public string ReadAllDll()
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller";
             var directories = Directory.GetDirectories(path);
             int directoriesCount = directories.Length;
-            string[] directoriesArray = new string[directoriesCount];
+            string directoriesString = "";
 
             for (int i = 0; i < directoriesCount; i++)
             {
-                directoriesArray[i] = directories[i].Remove(0, path.Length).Replace(@"\", " ");
+                directoriesString += directories[i].Remove(0, path.Length).Replace(@"\", " ") + "\r\n";
             }
 
-            return directoriesArray;
+            return directoriesString;
         }
     }
 }
