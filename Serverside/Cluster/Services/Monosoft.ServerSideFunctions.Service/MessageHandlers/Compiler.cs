@@ -49,6 +49,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
         public string CreateDll(string functionName, string functionString)
         {
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName);
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + "BackUp");
             string fileName = functionName + ".dll";
             var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
 
@@ -85,7 +86,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
         public object RunDll(string functionName, object[] parameters)
         {
             string fileName = functionName + ".dll";
-            var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName, fileName);
 
             object result = new object();
             try
@@ -176,35 +177,26 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
         public bool DeleteFunc(string functionName)
         {
             bool returnBool = false;
-            if(File.Exists(functionName+".dll"))
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll"))
             {
-                File.Delete(functionName+".dll");
+                Directory.Delete(Directory.GetCurrentDirectory() + @"\Dller\" + functionName,true);
                 returnBool = true;
             }
 
             return returnBool;
         }
-       public string UpdateDLL(string functionName, string functionString)
+        public string UpdateDLL(string functionName, string functionString)
         {
 
-            if(File.Exists(Directory.GetCurrentDirectory()+ @"\Dller\" + functionName + @"\" + functionName+".dll"))
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll"))
             {
-                if(File.Exists(functionName + "BackUp.dll"))
-                {
-                    
-                    string hej = Directory.GetCurrentDirectory() + @"\"+ functionName;
-                    Directory.CreateDirectory(functionName);
-                    File.Move(functionName + "BackUp.dll", hej + @"\" + functionName + "BackUp" + (Directory.GetFiles(hej).Count() + 1) + ".dll");
-                    File.Move(functionName + ".dll", functionName + "BackUp.dll");
-                }
-                else
-                {
-                    File.Move(functionName + ".dll", functionName + "BackUp.dll");
-                }
-                
+
+                File.Move(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll", Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + @"BackUp\" + functionName + "BackUp" + (Directory.GetFiles(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + @"BackUp").Count() + 1) + ".dll");
+
+
 
                 string fileName = functionName + ".dll";
-                var path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
 
                 SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
 
@@ -239,12 +231,12 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 return "FUNCTION DOES NOT EXSIST!";
             }
-            
+
         }
 
         public string ReadDll(string name)
         {
-            if(File.Exists(name+".json"))
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + name + @"\" + name + ".json"))
             {
                 DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(name + ".json"));
                 return func.FunctionData;
@@ -254,14 +246,22 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 return "NAVN GIVET FUNCTION FINDES IKKE!";
             }
 
-           
+
 
         }
-        public string ReadAllDll()
+        public string[] ReadAllDll()
         {
+            string path = Directory.GetCurrentDirectory() + @"\Dller";
+            var directories = Directory.GetDirectories(path);
+            int directoriesCount = directories.Length;
+            string[] directoriesArray = new string[directoriesCount];
 
+            for (int i = 0; i < directoriesCount; i++)
+            {
+                directoriesArray[i] = directories[i].Remove(0, path.Length).Replace(@"\", " ");
+            }
 
-            return "";
+            return directoriesArray;
         }
     }
 }

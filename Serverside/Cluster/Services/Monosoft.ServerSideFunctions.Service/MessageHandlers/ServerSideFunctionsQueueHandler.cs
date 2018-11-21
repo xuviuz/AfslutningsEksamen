@@ -101,6 +101,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var readFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string readResult = compiler.ReadDll(readFunc.Name);
+                            compiler.ReadAllDll();
 
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
 
