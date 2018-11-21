@@ -20,5 +20,35 @@ namespace Monosoft.ServerSideFunctions.Service
         /// Scope
         /// </summary>
         public static readonly string Scope = "Monosoft.ServerSideFuctions.Service";
+
+        /// <summary>
+        /// Route information for function created event
+        /// </summary>
+        public static readonly string RouteFunctionCreated = "function.create";
+
+        /// <summary>
+        /// Route information for function updated event
+        /// </summary>
+        public static readonly string RouteFunctionUpdated = "function.update";
+
+        /// <summary>
+        /// Route information for function deleted event
+        /// </summary>
+        public static readonly string RouteFunctionDeleted = "function.delete";
+
+        /// <summary>
+        /// Route information for function read event
+        /// </summary>
+        public static readonly string RouteFunctionRead = "function.read";
+
+        /// <summary>
+        /// Route information for function read event
+        /// </summary>
+        public static readonly string RouteFunctionReadAll = "function.readall";
+
+        /// <summary>
+        /// Route information for function read event
+        /// </summary>
+        public static readonly string RouteFunctionRun = "function.run";
     }
 }

@@ -45,7 +45,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             }
 
                             eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionCreated, eventdata);
 
                             if (createResult != null)
                             {
@@ -70,7 +70,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             }
 
                             eventdata = new Common.DTO.EventDTO(deletedResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionDeleted, eventdata);
 
                             if (deletedResult != "ERROR!")
                             {
@@ -88,7 +88,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             string updateResult = compiler.UpdateDLL(updateFuncDef.Name, updateFuncDef.FunctionData);
 
                             eventdata = new Common.DTO.EventDTO(updateResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionUpdated, eventdata);
 
                             if (updateResult != null)
                             {
@@ -107,7 +107,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             string readResult = compiler.ReadDll(readFunc.Name);
 
                             eventdata = new Common.DTO.EventDTO(readResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRead, eventdata);
 
                             if (readResult != null)
                             {
@@ -126,7 +126,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             string readallResult = compiler.ReadAllDll();
 
                             eventdata = new Common.DTO.EventDTO(readallResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionReadAll, eventdata);
 
                             if (readallResult != null)
                             {
@@ -146,7 +146,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var operationResult = compiler.RunDll(runFuncDef.Name, parameters);
 
                             eventdata = new Common.DTO.EventDTO(operationResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.Scope, eventdata);
+                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRun, eventdata);
 
                             if (operationResult != null)
                             {
