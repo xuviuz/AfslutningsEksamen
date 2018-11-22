@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+
+            <table style="width:100%">
+                <tr>
+                    <td>
+                        <input type="text" id="functionId" style="width:300px;" />
+                        <label> Function ID</label>
+                        <br />
+                        <br />
+                        <input type="text" id="functionName" style="width:300px" />
+                        <label> Function Name</label>
+                        <br />
+                        <br />
+                        <input type="text" id="parameters" style="width:300px" disabled/>
+                        <label> Parameters</label>
+                    </td>
+                    <td>
+                        <fieldset id="group1">
+                            <input type="radio" id="faf "value="faf" name="group1" checked> FAF
+                            <br />
+                            <input type="radio" id="rpc" value="rpc" name="group1"> RPC
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr /></td>
+                </tr>
+                <tr>
+                    <td style="width:50%">
+                        <label>Function</label>
+                        <br />
+                        <textarea id="function" style="width:90%; height:300px; white-space:pre; overflow-x:auto;"></textarea>
+                        <br />
+                    </td>
+                    <td style="width:50%">
+                        <label>Result</label>
+                        <br />
+                        <textarea id="result" style="width:90%; height:300px; white-space:pre; overflow-x:auto;" readonly></textarea>
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <br />
+                        <hr />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%">
+                        <select id="operation" style="width:200px;height:40px">
+                            <option value="create">CREATE</option>
+                            <option value="delete">DELETE</option>
+                            <option value="update">UPDATE</option>
+                            <option value="read">READ</option>
+                            <option value="readall">READ All</option>
+                            <option value="run">RUN</option>
+                        </select>
+                    </td>
+                    <td style="width:50%">
+                        <input type="button" id="postButton" value="Post" style="height:40px;width:100px;float:right;margin-right:50px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">&nbsp;</div>
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/aspnet/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+}
