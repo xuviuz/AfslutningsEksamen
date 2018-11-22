@@ -1,1 +1,0 @@
-{"Id":"1","Name":"Output","FunctionData":"namespace Temp\r\n{\r\nclass MyClass\r\n{\r\npublic int Sum(int a, int b)\r\n{\r\nreturn a + b;\r\n}\r\n}\r\n}"}

@@ -101,7 +101,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
             string fileName = functionName + ".dll";
-            if(Directory.Exists(path + fileName))
+            if(Directory.Exists(path))
             {
                 var pathToRead = Path.Combine(path, fileName);
 
