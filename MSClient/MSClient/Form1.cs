@@ -25,6 +25,7 @@ namespace MSClient
 
         static async void Run(Form1 form1)
         {
+
             string url = form1.textBoxURL.Text;
             FunctionDefinitions fd;
             switch (form1.comboBoxOperation.SelectedItem.ToString())
@@ -36,7 +37,7 @@ namespace MSClient
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
                 case "delete":
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text,form1.textBoxParams.Text);
+                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
                 case "update":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
@@ -48,7 +49,7 @@ namespace MSClient
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
             }
-           
+
             Customer customer = new Customer(
                 "clinetname",
                 "functions." + form1.comboBoxOperation.SelectedItem.ToString(),
@@ -77,6 +78,7 @@ namespace MSClient
             {
                 form1.textBoxResult.Text = ex.ToString();
             }
+
         }
 
         static async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent, Dictionary<string, string> pHeaders)
@@ -104,7 +106,7 @@ namespace MSClient
             textBoxParams.Enabled = comboBoxOperation.SelectedItem.ToString() == "run" ? true : false;
             textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "create" || comboBoxOperation.SelectedItem.ToString() == "update" ? true : false;
             readallCombo.Enabled = comboBoxOperation.SelectedItem.ToString() == "read" ? true : false;
-            if(comboBoxOperation.SelectedItem.ToString() == "read")
+            if (comboBoxOperation.SelectedItem.ToString() == "read")
             {
 
             }

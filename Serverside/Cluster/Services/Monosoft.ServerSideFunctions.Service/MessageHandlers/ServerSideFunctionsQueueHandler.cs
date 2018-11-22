@@ -31,18 +31,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 if (wrapper.MessageData != null)
                 {
+                    
                     switch (operation)
                     {
                         case "create":
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData);
-
-                            if (createResult != "Error whole creating" + createFuncDef.Name)
-                            {
-                                File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + createFuncDef.Name + @"\" + createFuncDef.Name + ".json", JsonConvert.SerializeObject(createFuncDef));
-
-                            }
+                            string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData,createFuncDef);
 
                             eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionCreated, eventdata);
@@ -85,7 +80,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "update":
                             var updateFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string updateResult = compiler.UpdateDLL(updateFuncDef.Name, updateFuncDef.FunctionData);
+                            string updateResult = compiler.UpdateDLL(updateFuncDef.Name, updateFuncDef.FunctionData,updateFuncDef);
 
                             eventdata = new Common.DTO.EventDTO(updateResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionUpdated, eventdata);

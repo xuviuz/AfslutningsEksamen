@@ -46,69 +46,92 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     .WithUsings(defaultNamespaces);
         }
 
-        public string CreateDll(string functionName, string functionString)
+        public string CreateDll(string functionName, string functionString, DTO.FunctionDefinitions jsonObj)
         {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName);
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + "BackUp");
-            string fileName = functionName + ".dll";
-            var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
+            string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
-            SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
-
-            var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
-
-            string res = "Error whole creating " + functionName;
-            try
+            if(!Directory.Exists(path))
             {
-                var result = compilation.Emit(path);
-                if (result.Success)
-                {
-                    res = functionName + " was created";
-                }
-                else
-                {
-                    IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
-                        diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName);
+                Directory.CreateDirectory(path + functionName + "BackUp");
+                string fileName = functionName + ".dll";
+                var pathToEmit = Path.Combine(path, fileName);
 
-                    foreach (Diagnostic diagnostic in failures)
+                SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
+
+                var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
+
+                string res = "Error whole creating " + functionName;
+                try
+                {
+                    var result = compilation.Emit(pathToEmit);
+                    if (result.Success)
                     {
-                        Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                        res = functionName + " was created";
+
+                        File.WriteAllText(path + functionName + ".json", JsonConvert.SerializeObject(jsonObj));
+                    }
+                    else
+                    {
+                        IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
+                            diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
+
+                        foreach (Diagnostic diagnostic in failures)
+                        {
+                            Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return res;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex);
+                return "FUNCTION ALREADY EXSISTS!";
             }
-            return res;
+
+            
         }
 
         public object RunDll(string functionName, object[] parameters)
         {
+
+            string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
             string fileName = functionName + ".dll";
-            var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName, fileName);
-
-            object result = new object();
-            try
+            if(Directory.Exists(path + fileName))
             {
+                var pathToRead = Path.Combine(path, fileName);
 
-                byte[] tempFileArray = File.ReadAllBytes(path);
-                var dll = Assembly.Load(tempFileArray);
-
-                foreach (Type type in dll.GetExportedTypes())
+                object result = new object();
+                try
                 {
-                    dynamic c = Activator.CreateInstance(type);
-                    //int temp = c.Sum(2, 3);
-                    result = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, parameters);
 
-                    Console.WriteLine(result);
+                    byte[] tempFileArray = File.ReadAllBytes(pathToRead);
+                    var dll = Assembly.Load(tempFileArray);
+
+                    foreach (Type type in dll.GetExportedTypes())
+                    {
+                        dynamic c = Activator.CreateInstance(type);
+                        //int temp = c.Sum(2, 3);
+                        result = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, parameters);
+
+                        Console.WriteLine(result);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                return result;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex);
+                return "FUNCTION DOES NOT EXSIST!";
             }
-            return result;
+            
         }
 
         public object[] ConvertToObjectArray(string inputString)
@@ -176,27 +199,34 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public bool DeleteFunc(string functionName)
         {
+            string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
+
             bool returnBool = false;
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll"))
+            if (File.Exists(path + functionName + ".dll"))
             {
-                Directory.Delete(Directory.GetCurrentDirectory() + @"\Dller\" + functionName,true);
+                Directory.Delete(path, true);
                 returnBool = true;
             }
 
             return returnBool;
         }
-        public string UpdateDLL(string functionName, string functionString)
+        public string UpdateDLL(string functionName, string functionString, DTO.FunctionDefinitions jsonobj)
         {
 
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll"))
+            string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
+            string pathForBackUp = path + functionName + @"BackUp\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1);
+
+            if (File.Exists(path + functionName + ".dll"))
             {
+                Directory.CreateDirectory(path + functionName + @"BackUp\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1));
 
-                File.Move(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".dll", Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + @"BackUp\" + functionName + "BackUp" + (Directory.GetFiles(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + @"BackUp").Count() + 1) + ".dll");
 
+                File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
+                File.Move(path + functionName + ".json", pathForBackUp + ".json");
 
 
                 string fileName = functionName + ".dll";
-                var path = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
+                var pathToEmit = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
 
                 SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
 
@@ -205,10 +235,14 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 string res = "Error whole updating " + functionName;
                 try
                 {
-                    var result = compilation.Emit(path);
+                    var result = compilation.Emit(pathToEmit);
                     if (result.Success)
                     {
                         res = functionName + " was updated!";
+
+                        File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".json", JsonConvert.SerializeObject(jsonobj));
+
+
                     }
                     else
                     {
@@ -236,9 +270,10 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public string ReadDll(string name)
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\Dller\" + name + @"\" + name + ".json"))
+            string path = Directory.GetCurrentDirectory() + @"\Dller\" + name + @"\";
+            if (File.Exists(path + name + ".json"))
             {
-                DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(name + ".json"));
+                DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(path + name + ".json"));
                 return func.FunctionData;
             }
             else

@@ -1,1 +1,1 @@
-{"Id":"23","Name":"Output","FunctionData":"namespace ye\r\n{\r\n    using System;\r\n\r\n    public class Class12\r\n    {\r\n        public int Output()\r\n        {\r\n           int x = 55;\r\n            int y = 12;\r\n            int u = 32;\r\n\r\n           return (x / y) + (u * x / y);\r\n        }\r\n    }\r\n}\r\n"}
+{"Id":"1","Name":"Output","FunctionData":"namespace Temp\r\n{\r\nclass MyClass\r\n{\r\npublic int Sum(int a, int b)\r\n{\r\nreturn a + b;\r\n}\r\n}\r\n}"}
