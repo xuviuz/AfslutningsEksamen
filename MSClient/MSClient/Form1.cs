@@ -30,19 +30,19 @@ namespace MSClient
             FunctionDefinitions fd;
             switch (form1.comboBoxOperation.SelectedItem.ToString())
             {
-                case "create":
+                case "CREATE":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
-                case "run":
+                case "RUN":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
-                case "delete":
+                case "DELETE":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
-                case "update":
+                case "UPDATE":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
                     break;
-                case "readall":
+                case "READALL":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
                 default:
@@ -52,7 +52,7 @@ namespace MSClient
 
             Customer customer = new Customer(
                 "clinetname",
-                "functions." + form1.comboBoxOperation.SelectedItem.ToString(),
+                "functions." + form1.comboBoxOperation.SelectedItem.ToString().ToLower(),
                 "unique message id defined by the caller",
                 Newtonsoft.Json.JsonConvert.SerializeObject(fd),
                 "00000000-0000-0000-0000-000000000000",
@@ -103,13 +103,8 @@ namespace MSClient
 
         private void comboBoxOperation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxParams.Enabled = comboBoxOperation.SelectedItem.ToString() == "run" ? true : false;
-            textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "create" || comboBoxOperation.SelectedItem.ToString() == "update" ? true : false;
-            readallCombo.Enabled = comboBoxOperation.SelectedItem.ToString() == "read" ? true : false;
-            if (comboBoxOperation.SelectedItem.ToString() == "read")
-            {
-
-            }
+            textBoxParams.Enabled = comboBoxOperation.SelectedItem.ToString() == "RUN" ? true : false;
+            textBoxFunction.Enabled = comboBoxOperation.SelectedItem.ToString() == "CREATE" || comboBoxOperation.SelectedItem.ToString() == "UPDATE" ? true : false;
         }
     }
 }
