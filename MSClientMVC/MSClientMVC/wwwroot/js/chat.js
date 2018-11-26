@@ -112,7 +112,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
                 }
                 break;
             case "update":
-                if (isNotEmpty(document.getElementById("functionName").value && isNotEmpty(document.getElementById("function").value))) {
+                if (isNotEmpty(document.getElementById("functionName").value) && isNotEmpty(document.getElementById("function").value)) {
                     functionDefinitions = {
                         id: document.getElementById("functionId").value,
                         name: document.getElementById("functionName").value,
