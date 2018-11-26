@@ -73,9 +73,9 @@ document.getElementById("postButton").addEventListener("click", function (event)
         var functionDefinitions;
         switch (document.getElementById("operation").value) {
             case "create":
-                if (isNotEmpty(document.getElementById("function").value) && isNotEmpty(document.getElementById("functionId").value) && isNotEmpty(document.getElementById("functionName").value)) {
+                if (isNotEmpty(document.getElementById("function").value) && isNotEmpty(document.getElementById("id").value) && isNotEmpty(document.getElementById("functionName").value)) {
                     functionDefinitions = {
-                        id: document.getElementById("functionId").value,
+                        id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("function").value
                     }
@@ -88,7 +88,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             case "run":
                 if (isNotEmpty(document.getElementById("functionName").value)) {
                     functionDefinitions = {
-                        id: document.getElementById("functionId").value,
+                        id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("parameters").value
                     }
@@ -101,7 +101,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             case "delete":
                 if (isNotEmpty(document.getElementById("functionName").value)) {
                     functionDefinitions = {
-                        id: document.getElementById("functionId").value,
+                        id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("parameters").value
                     }
@@ -114,7 +114,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             case "update":
                 if (isNotEmpty(document.getElementById("functionName").value) && isNotEmpty(document.getElementById("function").value)) {
                     functionDefinitions = {
-                        id: document.getElementById("functionId").value,
+                        id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("function").value
                     }
@@ -127,7 +127,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             case "read":
                 if (isNotEmpty(document.getElementById("functionName").value)) {
                     functionDefinitions = {
-                        id: document.getElementById("functionId").value,
+                        id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("function").value
                     }
@@ -139,7 +139,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
                 break;
             case "readall":
                 functionDefinitions = {
-                    id: document.getElementById("functionId").value,
+                    id: document.getElementById("id").value,
                     name: document.getElementById("functionName").value,
                     functionData: document.getElementById("function").value
                 }
