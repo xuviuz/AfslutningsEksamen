@@ -227,7 +227,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             if (File.Exists(path + functionName + ".dll"))
             {
                 Directory.CreateDirectory(path + functionName + @"BackUps\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1));
-                string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1);
+                string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count()) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count());
 
                 File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
                 File.Move(path + functionName + ".json", pathForBackUp + ".json");
