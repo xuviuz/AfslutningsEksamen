@@ -42,8 +42,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxParams = new System.Windows.Forms.TextBox();
-            this.readallCombo = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxURL
@@ -80,10 +78,13 @@
             // 
             // textBoxFunction
             // 
-            this.textBoxFunction.Location = new System.Drawing.Point(27, 256);
+            this.textBoxFunction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxFunction.Location = new System.Drawing.Point(27, 235);
             this.textBoxFunction.Multiline = true;
             this.textBoxFunction.Name = "textBoxFunction";
-            this.textBoxFunction.Size = new System.Drawing.Size(397, 217);
+            this.textBoxFunction.Size = new System.Drawing.Size(397, 238);
             this.textBoxFunction.TabIndex = 4;
             // 
             // label2
@@ -100,40 +101,44 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(601, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Name";
+            this.label3.Text = "NAME";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 240);
+            this.label4.Location = new System.Drawing.Point(42, 219);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.Size = new System.Drawing.Size(62, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Function";
+            this.label4.Text = "FUNCTION";
             // 
             // buttonPost
             // 
+            this.buttonPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPost.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.buttonPost.Location = new System.Drawing.Point(313, 489);
             this.buttonPost.Name = "buttonPost";
             this.buttonPost.Size = new System.Drawing.Size(111, 23);
             this.buttonPost.TabIndex = 8;
             this.buttonPost.Text = "POST";
-            this.buttonPost.UseVisualStyleBackColor = true;
+            this.buttonPost.UseVisualStyleBackColor = false;
             this.buttonPost.Click += new System.EventHandler(this.buttonPost_Click);
             // 
             // comboBoxOperation
             // 
+            this.comboBoxOperation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxOperation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxOperation.FormattingEnabled = true;
             this.comboBoxOperation.IntegralHeight = false;
             this.comboBoxOperation.Items.AddRange(new object[] {
-            "create",
-            "delete",
-            "update",
-            "read",
-            "readall",
-            "run"});
+            "CREATE",
+            "DELETE",
+            "UPDATE",
+            "READ",
+            "READALL",
+            "RUN"});
             this.comboBoxOperation.Location = new System.Drawing.Point(27, 491);
             this.comboBoxOperation.Name = "comboBoxOperation";
             this.comboBoxOperation.Size = new System.Drawing.Size(121, 21);
@@ -142,31 +147,35 @@
             // 
             // textBoxResult
             // 
+            this.textBoxResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxResult.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxResult.Location = new System.Drawing.Point(457, 256);
+            this.textBoxResult.Location = new System.Drawing.Point(457, 235);
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
-            this.textBoxResult.Size = new System.Drawing.Size(303, 217);
+            this.textBoxResult.Size = new System.Drawing.Size(303, 238);
             this.textBoxResult.TabIndex = 10;
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(475, 240);
+            this.label5.Location = new System.Drawing.Point(477, 219);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.Size = new System.Drawing.Size(50, 13);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Result";
+            this.label5.Text = "RESULT";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(601, 163);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.Size = new System.Drawing.Size(81, 13);
             this.label6.TabIndex = 13;
-            this.label6.Text = "Parameters";
+            this.label6.Text = "PARAMETERS";
             // 
             // textBoxParams
             // 
@@ -176,30 +185,11 @@
             this.textBoxParams.Size = new System.Drawing.Size(546, 20);
             this.textBoxParams.TabIndex = 12;
             // 
-            // readallCombo
-            // 
-            this.readallCombo.FormattingEnabled = true;
-            this.readallCombo.Location = new System.Drawing.Point(27, 202);
-            this.readallCombo.Name = "readallCombo";
-            this.readallCombo.Size = new System.Drawing.Size(546, 21);
-            this.readallCombo.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(601, 205);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Vælg funktion";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 524);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.readallCombo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxParams);
             this.Controls.Add(this.label5);
@@ -215,7 +205,7 @@
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.textBoxURL);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MSClient";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,8 +227,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxParams;
-        private System.Windows.Forms.ComboBox readallCombo;
-        private System.Windows.Forms.Label label7;
     }
 }
 
