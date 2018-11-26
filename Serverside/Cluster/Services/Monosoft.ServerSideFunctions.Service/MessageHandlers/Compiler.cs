@@ -53,7 +53,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             if(!Directory.Exists(path))
             {
                 Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\Dller\" + functionName);
-                Directory.CreateDirectory(path + functionName + "BackUp");
+                Directory.CreateDirectory(path + functionName + "BackUps");
                 string fileName = functionName + ".dll";
                 var pathToEmit = Path.Combine(path, fileName);
 
@@ -98,8 +98,18 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public object RunDll(string functionName, object[] parameters)
         {
-
-            string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
+            string path, runFunctionName;
+            if (!functionName.Contains("BackUp"))
+            {
+                runFunctionName = functionName;
+                path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
+            }
+            else
+            {
+                var folderName = functionName.Split("BackUp")[0];
+                runFunctionName = folderName;
+                path = Directory.GetCurrentDirectory() + @"\Dller\" + folderName + @"\" + folderName + @"BackUps\" + functionName + @"\";
+            }
             string fileName = functionName + ".dll";
             if(Directory.Exists(path))
             {
@@ -108,15 +118,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 object result = new object();
                 try
                 {
-
                     byte[] tempFileArray = File.ReadAllBytes(pathToRead);
                     var dll = Assembly.Load(tempFileArray);
 
                     foreach (Type type in dll.GetExportedTypes())
                     {
                         dynamic c = Activator.CreateInstance(type);
-                        //int temp = c.Sum(2, 3);
-                        result = type.InvokeMember(functionName, BindingFlags.InvokeMethod, null, c, parameters);
+                        result = type.InvokeMember(runFunctionName, BindingFlags.InvokeMethod, null, c, parameters);
 
                         Console.WriteLine(result);
                     }
@@ -124,6 +132,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
+                    return ex.ToString();
                 }
                 return result;
             }
@@ -210,23 +219,22 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
             return returnBool;
         }
+
         public string UpdateDLL(string functionName, string functionString, DTO.FunctionDefinitions jsonobj)
         {
-
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
-            string pathForBackUp = path + functionName + @"BackUp\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1);
 
             if (File.Exists(path + functionName + ".dll"))
             {
-                Directory.CreateDirectory(path + functionName + @"BackUp\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUp").Count() + 1));
-
+                Directory.CreateDirectory(path + functionName + @"BackUps\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1));
+                string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1);
 
                 File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
                 File.Move(path + functionName + ".json", pathForBackUp + ".json");
 
 
                 string fileName = functionName + ".dll";
-                var pathToEmit = Path.Combine(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\", fileName);
+                var pathToEmit = Path.Combine(path, fileName);
 
                 SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
 
@@ -263,35 +271,64 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             }
             else
             {
-                return "FUNCTION DOES NOT EXSIST!";
+                return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
             }
 
         }
 
-        public string ReadDll(string name)
+        public string ReadDll(string functionName)
         {
-            string path = Directory.GetCurrentDirectory() + @"\Dller\" + name + @"\";
-            if (File.Exists(path + name + ".json"))
+            string path;
+            if (!functionName.Contains("BackUp"))
             {
-                DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(path + name + ".json"));
+                path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
+            }
+            else
+            {
+                var folderName = functionName.Split("BackUp")[0];
+                path = Directory.GetCurrentDirectory() + @"\Dller\" + folderName + @"\" + folderName + @"BackUps\" + functionName + @"\";
+            }
+
+            if (File.Exists(path + functionName + ".json"))
+            {
+                DTO.FunctionDefinitions func = JsonConvert.DeserializeObject<DTO.FunctionDefinitions>(File.ReadAllText(path + functionName + ".json"));
                 return func.FunctionData;
             }
             else
             {
-                return "NAVN GIVET FUNCTION FINDES IKKE!";
+                return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
             }
 
 
 
         }
-        public string ReadAllDll()
+        public string ReadAllDll(string functionName)
         {
-            string path = Directory.GetCurrentDirectory() + @"\Dller";
+            string path;
+            if (string.IsNullOrEmpty(functionName))
+            {
+                path = Directory.GetCurrentDirectory() + @"\Dller";
+            }
+            else
+            {
+                if (functionName.Contains("BackUp"))
+                {
+                    return "FUNCTION '" + functionName + "' DOES NOT CONTAIN BACKUPS";
+                }
+                path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + "BackUps";
+                if (!Directory.Exists(path))
+                {
+                    return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
+                }
+            }
             var directories = Directory.GetDirectories(path);
-            int directoriesCount = directories.Length;
+            if (directories.Length == 0)
+            {
+                return "THERE ARE NO FUNCTIONS / BACKUPS";
+            }
             string directoriesString = "";
 
-            for (int i = 0; i < directoriesCount; i++)
+            for (int i = 0; i < directories.Length; i++)
             {
                 directoriesString += directories[i].Remove(0, path.Length).Replace(@"\", " ") + "\r\n";
             }

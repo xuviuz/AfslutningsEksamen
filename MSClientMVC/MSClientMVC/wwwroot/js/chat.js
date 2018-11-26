@@ -24,7 +24,7 @@ connection.on("function.run", function (json) {
 });
 
 connection.on("function.read", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1).replace(/(?:\\[n]|[\n]+)+/g, "\n");
+    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
 });
 
 connection.on("function.readall", function (json) {

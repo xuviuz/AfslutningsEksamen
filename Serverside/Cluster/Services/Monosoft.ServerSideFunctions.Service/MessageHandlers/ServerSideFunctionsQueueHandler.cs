@@ -37,7 +37,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "create":
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData,createFuncDef);
+                            string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData, createFuncDef);
 
                             eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionCreated, eventdata);
@@ -118,7 +118,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             var readallFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string readallResult = compiler.ReadAllDll();
+                            string readallResult = compiler.ReadAllDll(readallFunc.Name);
 
                             eventdata = new Common.DTO.EventDTO(readallResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionReadAll, eventdata);
