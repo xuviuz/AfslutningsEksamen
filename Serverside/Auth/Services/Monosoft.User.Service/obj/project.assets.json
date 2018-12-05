@@ -13798,23 +13798,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\.nuget\\packages\\": {},
+    "C:\\Users\\krist\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Services\\Monosoft.User.Service\\Monosoft.User.Service.csproj",
+      "projectUniqueName": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Services\\Monosoft.User.Service\\Monosoft.User.Service.csproj",
       "projectName": "Monosoft.User.Service",
-      "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Services\\Monosoft.User.Service\\Monosoft.User.Service.csproj",
-      "packagesPath": "C:\\Users\\Alex\\.nuget\\packages\\",
-      "outputPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Services\\Monosoft.User.Service\\obj\\",
+      "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Services\\Monosoft.User.Service\\Monosoft.User.Service.csproj",
+      "packagesPath": "C:\\Users\\krist\\.nuget\\packages\\",
+      "outputPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Services\\Monosoft.User.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\krist\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13827,23 +13827,23 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.Database\\Monosoft.Auth.Database.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.Database\\Monosoft.Auth.Database.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Monosoft.Auth.Database\\Monosoft.Auth.Database.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Monosoft.Auth.Database\\Monosoft.Auth.Database.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Auth\\Monosoft.Auth.DTO\\Monosoft.Auth.DTO.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.DTO\\Monosoft.Common.DTO.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.MessageQueue\\Monosoft.Common.MessageQueue.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.TokenHandler\\Monosoft.Common.TokenHandler.csproj"
             },
-            "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
-              "projectPath": "E:\\lektions\\Last\\MyRanch\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
+            "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj": {
+              "projectPath": "C:\\AFSLUTNINGSEKSAMEN\\Serverside\\Common\\Monosoft.Common.Utils\\Monosoft.Common.Utils.csproj"
             }
           }
         }

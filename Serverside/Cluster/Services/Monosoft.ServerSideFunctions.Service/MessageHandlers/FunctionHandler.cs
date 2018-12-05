@@ -9,18 +9,18 @@ using System.Reflection;
 
 namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 {
-    class Compiler
+    class FunctionHandler
     {
-        private static string[] defaultNamespaces;
+        private readonly IEnumerable<string> defaultNamespaces;
 
-        private static string runtimePath;
+        private readonly string runtimePath;
 
-        private static MetadataReference[] defaultReferences;
+        private readonly IEnumerable<MetadataReference> defaultReferences;
 
-        private static CSharpCompilationOptions options;
+        private readonly CSharpCompilationOptions options;
 
 
-        public Compiler()
+        public FunctionHandler()
         {
             defaultNamespaces = new[]
            {
@@ -46,7 +46,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     .WithUsings(defaultNamespaces);
         }
 
-        public string CreateDll(string functionName, string functionString, DTO.FunctionDefinitions jsonObj)
+        public string CreateFunction(string functionName, string functionString, DTO.FunctionDefinitions jsonObj)
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
@@ -96,7 +96,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             
         }
 
-        public object RunDll(string functionName, object[] parameters)
+        public object RunFunction(string functionName, object[] parameters)
         {
             string path, runFunctionName;
             if (!functionName.Contains("BackUp"))
@@ -206,7 +206,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return outputArray;
         }
 
-        public bool DeleteFunc(string functionName)
+        public bool DeleteFunction(string functionName)
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
@@ -220,7 +220,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return returnBool;
         }
 
-        public string UpdateDLL(string functionName, string functionString, DTO.FunctionDefinitions jsonobj)
+        public string UpdateFunction(string functionName, string functionString, DTO.FunctionDefinitions jsonobj)
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
@@ -276,7 +276,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         }
 
-        public string ReadDll(string functionName)
+        public string ReadFunction(string functionName)
         {
             string path;
             if (!functionName.Contains("BackUp"))
@@ -302,7 +302,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
 
         }
-        public string ReadAllDll(string functionName)
+        public string ReadAllFunctions(string functionName)
         {
             string path;
             if (string.IsNullOrEmpty(functionName))
