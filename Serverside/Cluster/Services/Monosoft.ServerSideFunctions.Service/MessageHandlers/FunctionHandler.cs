@@ -46,8 +46,11 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     .WithUsings(defaultNamespaces);
         }
 
-        public string CreateFunction(string functionName, string functionString, DTO.FunctionDefinitions jsonObj)
+        public string CreateFunction(DTO.FunctionDefinitions jsonObj)
         {
+            string functionName = jsonObj.Name;
+            string functionString = jsonObj.FunctionData;
+
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
             if(!Directory.Exists(path))
@@ -61,7 +64,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "Error whole creating " + functionName;
+                string res = "Error while creating " + functionName;
                 try
                 {
                     var result = compilation.Emit(pathToEmit);
@@ -91,7 +94,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             }
             else
             {
-                return "FUNCTION ALREADY EXSISTS!";
+                return "FUNCTION '" + functionName + "' ALREADY EXSISTS!";
             }
 
             
@@ -139,7 +142,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             }
             else
             {
-                return "FUNCTION DOES NOT EXSIST!";
+                return "FUNCTION '" + functionName + "' DOES NOT EXSIST!";
             }
             
         }
@@ -221,8 +224,10 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             return returnBool;
         }
 
-        public string UpdateFunction(string functionName, string functionString, DTO.FunctionDefinitions jsonobj)
+        public string UpdateFunction(DTO.FunctionDefinitions jsonobj)
         {
+            string functionName = jsonobj.Name;
+            string functionString = jsonobj.FunctionData;
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
             if (File.Exists(path + functionName + ".dll"))
@@ -238,7 +243,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "Error whole updating " + functionName;
+                string res = "Error while updating " + functionName;
                 try
                 {
                     var result = compilation.Emit(pathToEmit);

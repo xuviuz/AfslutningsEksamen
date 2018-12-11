@@ -23,7 +23,7 @@ namespace FunctionHandlerTester
             funcDef.Name = "ForTesting";
             funcDef.FunctionData = "";
 
-            var actualResult = CreateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = CreateFunction(funcDef);
             var expectedResult = funcDef.Name + " was created";
 
             Assert.Equal(expectedResult, actualResult);
@@ -36,7 +36,7 @@ namespace FunctionHandlerTester
             funcDef.Name = "Blergh";
             funcDef.FunctionData = "iwhegiwheg";
 
-            var actualResult = CreateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = CreateFunction(funcDef);
             var expectedResult = "Error while creating " + funcDef.Name;
 
             Assert.Equal(expectedResult, actualResult);
@@ -50,7 +50,7 @@ namespace FunctionHandlerTester
             funcDef.Name = "ForTesting";
             funcDef.FunctionData = "";
 
-            var actualResult = CreateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = CreateFunction(funcDef);
             var expectedResult = "FUNCTION ALREADY EXSISTS!";
 
             Assert.Equal(expectedResult, actualResult);
@@ -90,8 +90,11 @@ namespace FunctionHandlerTester
                     .WithOverflowChecks(true).WithOptimizationLevel(OptimizationLevel.Release)
                     .WithUsings(defaultNamespaces);
         }
-        public string CreateFunction(string functionName, string functionString, FunctionDefinitions jsonObj)
+        public string CreateFunction(FunctionDefinitions jsonObj)
         {
+            string functionName = jsonObj.Name;
+            string functionString = jsonObj.FunctionData;
+
             string path = @"C:\AFSLUTNINGSEKSAMEN\Serverside\Cluster\Services\Monosoft.ServerSideFunctions.Service\bin\Debug\netcoreapp2.1\Dller\" + functionName + @"\";
 
             if (!Directory.Exists(path))
@@ -362,7 +365,7 @@ namespace FunctionHandlerTester
             funcDef.Name = "ForTesting";
             funcDef.FunctionData = "";
 
-            var actualResult = UpdateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = UpdateFunction(funcDef);
             var expectedResult = funcDef.Name + " was updated!";
 
             Assert.Equal(expectedResult, actualResult);
@@ -375,7 +378,7 @@ namespace FunctionHandlerTester
             funcDef.Name = "ForTesting";
             funcDef.FunctionData = "egrs";
 
-            var actualResult = UpdateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = UpdateFunction(funcDef);
             var expectedResult = "Error while updating " + funcDef.Name;
 
             Assert.Equal(expectedResult, actualResult);
@@ -389,14 +392,16 @@ namespace FunctionHandlerTester
             funcDef.Name = "3rgwet";
             funcDef.FunctionData = "egrs";
 
-            var actualResult = UpdateFunction(funcDef.Name, funcDef.FunctionData, funcDef);
+            var actualResult = UpdateFunction(funcDef);
             var expectedResult = "FUNCTION '" + funcDef.Name + "' DOES NOT EXIST!";
 
             Assert.Equal(expectedResult, actualResult);
         }
 
-        public string UpdateFunction(string functionName, string functionString, FunctionDefinitions jsonobj)
+        public string UpdateFunction(FunctionDefinitions jsonobj)
         {
+            string functionName = jsonobj.Name;
+            string functionString = jsonobj.FunctionData;
             string path = @"C:\AFSLUTNINGSEKSAMEN\Serverside\Cluster\Services\Monosoft.ServerSideFunctions.Service\bin\Debug\netcoreapp2.1\Dller\" + functionName + @"\";
 
             if (File.Exists(path + functionName + ".dll"))
