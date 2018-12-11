@@ -25,7 +25,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             //CallContext cc = new CallContext(wrapper.OrgContext, new Common.DTO.Token() { Tokenid = wrapper.UserContextToken, Scope = GlobalValues.Scope }, wrapper.IssuedDate);
             var operation = topicparts[1];
             Common.DTO.EventDTO eventdata = null;
-            Compiler compiler = new Compiler();
+            FunctionHandler compiler = new FunctionHandler();
 
             if (true) // cc.IsServerSideFunctionsAdmin
             {
@@ -37,7 +37,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "create":
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string createResult = compiler.CreateDll(createFuncDef.Name, createFuncDef.FunctionData, createFuncDef);
+                            string createResult = compiler.CreateFunction(createFuncDef.Name, createFuncDef.FunctionData, createFuncDef);
 
                             eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionCreated, eventdata);
@@ -55,7 +55,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "delete":
                             var deleteResult = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
                             string deletedResult = "ERROR!";
-                            if (compiler.DeleteFunc(deleteResult.Name) == true)
+                            if (compiler.DeleteFunction(deleteResult.Name) == true)
                             {
                                 deletedResult = deleteResult.Name.ToUpper() + " WAS DELETED!";
                             }
@@ -80,7 +80,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         case "update":
                             var updateFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string updateResult = compiler.UpdateDLL(updateFuncDef.Name, updateFuncDef.FunctionData,updateFuncDef);
+                            string updateResult = compiler.UpdateFunction(updateFuncDef.Name, updateFuncDef.FunctionData,updateFuncDef);
 
                             eventdata = new Common.DTO.EventDTO(updateResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionUpdated, eventdata);
@@ -99,7 +99,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             var readFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string readResult = compiler.ReadDll(readFunc.Name);
+                            string readResult = compiler.ReadFunction(readFunc.Name);
 
                             eventdata = new Common.DTO.EventDTO(readResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRead, eventdata);
@@ -118,7 +118,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             var readallFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            string readallResult = compiler.ReadAllDll(readallFunc.Name);
+                            string readallResult = compiler.ReadAllFunctions(readallFunc.Name);
 
                             eventdata = new Common.DTO.EventDTO(readallResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionReadAll, eventdata);
@@ -138,7 +138,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             object[] parameters = compiler.ConvertToObjectArray(runFuncDef.FunctionData);
-                            var operationResult = compiler.RunDll(runFuncDef.Name, parameters);
+                            var operationResult = compiler.RunFunction(runFuncDef.Name, parameters);
 
                             eventdata = new Common.DTO.EventDTO(operationResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRun, eventdata);

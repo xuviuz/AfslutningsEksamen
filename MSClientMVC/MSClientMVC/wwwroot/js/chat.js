@@ -86,12 +86,14 @@ document.getElementById("postButton").addEventListener("click", function (event)
                 }
                 break;
             case "run":
+
                 if (isNotEmpty(document.getElementById("functionName").value)) {
                     functionDefinitions = {
                         id: document.getElementById("id").value,
                         name: document.getElementById("functionName").value,
                         functionData: document.getElementById("parameters").value
                     }
+
                 }
                 else {
                     document.getElementById("result").innerText = "Missing input data!";
@@ -147,25 +149,26 @@ document.getElementById("postButton").addEventListener("click", function (event)
             default:
                 break;
         }
-        
-            var data = JSON.stringify(functionDefinitions);
-            start();
-            var promise = connection.invoke(
-                'WriteMessage',
-                "client name",
-                "functions." + document.getElementById("operation").value, //route,
-                "unique message id defined by the caller", //messageid,
-                data, //json,
-                emptyGuid, //organisationId
-                userContextToken,
-                'All') //tracing
-                .catch(function (err) {
-                    return console.error(err.toString());
-                });
-            promise.then(function (value) {
-                end();
+
+        var data = JSON.stringify(functionDefinitions);
+        start();
+        var promise = connection.invoke(
+            'WriteMessage',
+            "client name",
+            "functions." + document.getElementById("operation").value, //route,
+            "unique message id defined by the caller", //messageid,
+            data, //json,
+            emptyGuid, //organisationId
+            userContextToken,
+            'All') //tracing
+            .catch(function (err) {
+                return console.error(err.toString());
             });
     }
+    promise.then(function (value) {
+        end();
+    });
+
     event.preventDefault();
 });
 
