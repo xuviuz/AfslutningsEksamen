@@ -73,6 +73,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     }
                     else
                     {
+                        DeleteFunction(functionName);
                         IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                             diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
 
@@ -145,7 +146,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public object[] ConvertToObjectArray(string inputString)
         {
-            if (string.IsNullOrEmpty(inputString.Replace(" ", "")))
+            if (string.IsNullOrEmpty(inputString.Replace(" ", "")) || !inputString.Contains(":"))
             {
                 return new object[] { };
             }
@@ -229,11 +230,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 Directory.CreateDirectory(path + functionName + @"BackUps\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1));
                 string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count()) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count());
 
-                File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
-                File.Move(path + functionName + ".json", pathForBackUp + ".json");
 
-
-                string fileName = functionName + ".dll";
+                string fileName = functionName + "Holder.dll";
                 var pathToEmit = Path.Combine(path, fileName);
 
                 SyntaxTree syntaxTree = SyntaxFactory.ParseSyntaxTree(functionString);
@@ -248,12 +246,19 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     {
                         res = functionName + " was updated!";
 
+                        File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
+                        File.Move(path + functionName + ".json", pathForBackUp + ".json");
+
+                        File.Move(path + functionName + "Holder.dll", path + functionName + ".dll");
+
                         File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".json", JsonConvert.SerializeObject(jsonobj));
 
 
                     }
                     else
                     {
+
+                        File.Delete(path + functionName + "Holder.dll");
                         IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                             diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
 
@@ -298,9 +303,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
             }
-
-
-
         }
         public string ReadAllFunctions(string functionName)
         {
