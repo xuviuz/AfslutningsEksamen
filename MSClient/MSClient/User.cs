@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MSClient
 {
-    class Customer
+    class User
     {
         public string Scope { get; set; }
         public string Route { get; set; }
@@ -16,7 +16,7 @@ namespace MSClient
         public string UserContextToken { get; set; }
         public string Tracing { get; set; }
 
-        public Customer(string scope, string route, string messageid, string json, string organisationId, string userContextToken,
+        public User(string scope, string route, string messageid, string json, string organisationId, string userContextToken,
             string tracing)
         {
             this.Scope = scope;

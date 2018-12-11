@@ -9,7 +9,7 @@ namespace MSClient
 {
     public partial class Form1 : Form
     {
-        private static readonly HttpClient _Client = new HttpClient();
+        private static readonly HttpClient _client = new HttpClient();
 
         public Form1()
         {
@@ -23,34 +23,77 @@ namespace MSClient
             Run(this);
         }
 
-        static async void Run(Form1 form1)
+        /// <summary>
+        /// Makes ready data to send and handles response
+        /// </summary>
+        /// <param name="form1">Form1 instance</param>
+        private async void Run(Form1 form1)
         {
-
             string url = form1.textBoxURL.Text;
             FunctionDefinitions fd;
             switch (form1.comboBoxOperation.SelectedItem.ToString())
             {
                 case "CREATE":
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    if (string.IsNullOrEmpty(form1.textBoxID.Text) || string.IsNullOrEmpty(form1.textBoxName.Text) || string.IsNullOrEmpty(form1.textBoxFunction.Text))
+                    {
+                        MessageBox.Show("Missing input data!");
+                        return;
+                    }
+                    else
+                    {
+                        fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    }
                     break;
                 case "RUN":
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
+                    if (string.IsNullOrEmpty(form1.textBoxName.Text))
+                    {
+                        MessageBox.Show("Missing input data!");
+                        return;
+                    }
+                    else
+                    {
+                        fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
+                    }
                     break;
                 case "DELETE":
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
+                    if (string.IsNullOrEmpty(form1.textBoxName.Text))
+                    {
+                        MessageBox.Show("Missing input data!");
+                        return;
+                    }
+                    else
+                    {
+                        fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
+                    }
                     break;
                 case "UPDATE":
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    if (string.IsNullOrEmpty(form1.textBoxName.Text) || string.IsNullOrEmpty(form1.textBoxFunction.Text))
+                    {
+                        MessageBox.Show("Missing input data!");
+                        return;
+                    }
+                    else
+                    {
+                        fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    }
                     break;
                 case "READALL":
                     fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxParams.Text);
                     break;
                 default:
-                    fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    if (string.IsNullOrEmpty(form1.textBoxName.Text))
+                    {
+                        MessageBox.Show("Missing input data!");
+                        return;
+                    }
+                    else
+                    {
+                        fd = new FunctionDefinitions(form1.textBoxID.Text, form1.textBoxName.Text, form1.textBoxFunction.Text);
+                    }
                     break;
             }
 
-            Customer customer = new Customer(
+            User user = new User(
                 "clinetname",
                 "functions." + form1.comboBoxOperation.SelectedItem.ToString().ToLower(),
                 "unique message id defined by the caller",
@@ -58,7 +101,7 @@ namespace MSClient
                 "00000000-0000-0000-0000-000000000000",
                 "00000000-0000-0000-0000-000000000000",
                 "All");
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(customer);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(user);
 
             try
             {
@@ -71,17 +114,26 @@ namespace MSClient
 
                 var rmw = Serializer<ReturnMessageWrapper>.GetData(responseBytearray);
 
-                var myData = Newtonsoft.Json.JsonConvert.DeserializeObject(Encoding.UTF8.GetString(rmw.Data));
-                form1.textBoxResult.Text = myData.ToString();
+                //var myData = Newtonsoft.Json.JsonConvert.DeserializeObject(Encoding.UTF8.GetString(rmw.Data));
+                //form1.textBoxResult.Text = myData.ToString();
+
+                form1.textBoxResult.Text = Serializer<string>.GetData(rmw.Data);
             }
             catch (Exception ex)
             {
                 form1.textBoxResult.Text = ex.ToString();
             }
-
         }
 
-        static async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent, Dictionary<string, string> pHeaders)
+        /// <summary>
+        /// Performs sending data to web API
+        /// </summary>
+        /// <param name="pMethod">HttpMethod</param>
+        /// <param name="pUrl">url</param>
+        /// <param name="pJsonContent">json content</param>
+        /// <param name="pHeaders">headers</param>
+        /// <returns></returns>
+        private async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent, Dictionary<string, string> pHeaders)
         {
             var httpRequestMessage = new HttpRequestMessage();
             httpRequestMessage.Method = pMethod;
@@ -98,7 +150,7 @@ namespace MSClient
                     break;
 
             }
-            return await _Client.SendAsync(httpRequestMessage);
+            return await _client.SendAsync(httpRequestMessage);
         }
 
         private void comboBoxOperation_SelectedIndexChanged(object sender, EventArgs e)
