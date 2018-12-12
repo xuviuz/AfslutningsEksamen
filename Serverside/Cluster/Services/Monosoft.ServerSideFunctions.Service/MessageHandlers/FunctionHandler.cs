@@ -144,7 +144,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 return "FUNCTION '" + functionName + "' DOES NOT EXSIST!";
             }
-            
         }
 
         public object[] ConvertToObjectArray(string inputString)
@@ -162,7 +161,8 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 variables += item[0] + " value" + i.ToString() + " = " + item[1] + ";";
                 returnArray += i == 0 ? item[1] : ", " + item[1];
             }
-            string paramFunctionString = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + variables + " return new object[] { " + returnArray + " }; } } }";
+            string paramFunctionString = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + 
+                variables + " return new object[] { " + returnArray + " }; } } }";
 
             return GetParametersArray(paramFunctionString);
         }
@@ -209,19 +209,17 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             Console.WriteLine(res);
             return outputArray;
         }
-
-        public bool DeleteFunction(string functionName)
+     
+        public string DeleteFunction(string functionName)
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
 
-            bool returnBool = false;
             if (File.Exists(path + functionName + ".dll"))
             {
                 Directory.Delete(path, true);
-                returnBool = true;
+                return "FUNCTION '" + functionName + "' WAS DELETED!";
             }
-
-            return returnBool;
+            return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
         }
 
         public string UpdateFunction(DTO.FunctionDefinitions jsonobj)
@@ -235,7 +233,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 Directory.CreateDirectory(path + functionName + @"BackUps\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1));
                 string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count()) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count());
 
-
                 string fileName = functionName + "Holder.dll";
                 var pathToEmit = Path.Combine(path, fileName);
 
@@ -243,13 +240,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "Error while updating " + functionName;
+                string res = "ERROR WHILE UPDATING '" + functionName + "'";
                 try
                 {
                     var result = compilation.Emit(pathToEmit);
                     if (result.Success)
                     {
-                        res = functionName + " was updated!";
+                        res = "FUNCTION '" + functionName + "' WAS UPDATED!";
 
                         File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
                         File.Move(path + functionName + ".json", pathForBackUp + ".json");
@@ -257,12 +254,9 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                         File.Move(path + functionName + "Holder.dll", path + functionName + ".dll");
 
                         File.WriteAllText(Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\" + functionName + ".json", JsonConvert.SerializeObject(jsonobj));
-
-
                     }
                     else
                     {
-
                         File.Delete(path + functionName + "Holder.dll");
                         IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                             diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
@@ -283,7 +277,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
             }
-
         }
 
         public string ReadFunction(string functionName)
@@ -309,6 +302,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
             }
         }
+
         public string ReadAllFunctions(string functionName)
         {
             string path;

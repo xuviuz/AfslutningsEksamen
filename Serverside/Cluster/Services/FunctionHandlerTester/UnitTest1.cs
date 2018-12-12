@@ -225,7 +225,7 @@ namespace FunctionHandlerTester
         public void DeleteFuncTest()
         {
             var actualResult = DeleteFunction("ForTesting");
-            bool expectedResult = true;
+            string expectedResult = "FUNCTION 'ForTesting' WAS DELETED!";
 
             Assert.Equal(expectedResult, actualResult);
         }
@@ -234,24 +234,21 @@ namespace FunctionHandlerTester
         public void DeleteFuncTestFail()
         {
             var actualResult = DeleteFunction("gwegweg");
-            bool expectedResult = false;
+            string expectedResult = "FUNCTION 'gwegweg' DOES NOT EXIST!";
 
             Assert.Equal(expectedResult, actualResult);
         }
 
-
-        public bool DeleteFunction(string functionName)
+        public string DeleteFunction(string functionName)
         {
             string path = @"C:\AFSLUTNINGSEKSAMEN\Serverside\Cluster\Services\Monosoft.ServerSideFunctions.Service\bin\Debug\netcoreapp2.1\Dller\" + functionName + @"\";
 
-            bool returnBool = false;
             if (File.Exists(path + functionName + ".dll"))
             {
                 Directory.Delete(path, true);
-                returnBool = true;
+                return "FUNCTION '" + functionName + "' WAS DELETED!";
             }
-
-            return returnBool;
+            return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
         }
         #endregion
         #region ParameterConvert

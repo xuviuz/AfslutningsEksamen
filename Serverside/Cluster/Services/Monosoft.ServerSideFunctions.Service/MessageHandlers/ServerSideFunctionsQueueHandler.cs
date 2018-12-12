@@ -53,27 +53,19 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             break;
                         case "delete":
-                            var deleteResult = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
-                            string deletedResult = "ERROR!";
-                            if (functionHandler.DeleteFunction(deleteResult.Name) == true)
-                            {
-                                deletedResult = deleteResult.Name.ToUpper() + " WAS DELETED!";
-                            }
-                            else
-                            {
-                                deletedResult = "FILE DOES NOT EXIST! MAYBE THERE WAS A TYPO?";
-                            }
+                            var deleteFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+                            string deleteResult = functionHandler.DeleteFunction(deleteFuncDef.Name);
 
-                            eventdata = new Common.DTO.EventDTO(deletedResult, wrapper.Clientid, wrapper.Messageid);
+                            eventdata = new Common.DTO.EventDTO(deleteResult, wrapper.Clientid, wrapper.Messageid);
                             Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionDeleted, eventdata);
 
-                            if (deletedResult != "ERROR!")
+                            if (deleteResult != null)
                             {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, deletedResult);
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, deleteResult);
                             }
                             else
                             {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, deletedResult);
+                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, deleteResult);
                             }
 
                             break;
