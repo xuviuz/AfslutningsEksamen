@@ -262,7 +262,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     }
                     else
                     {
-
+                        Directory.Delete(pathForBackUp);
                         File.Delete(path + functionName + "Holder.dll");
                         IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                             diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);
