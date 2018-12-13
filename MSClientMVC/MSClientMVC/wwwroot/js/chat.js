@@ -6,32 +6,44 @@ connection.start().catch(function (err) {
     return console.error(err.toString());
 });
 
-
 connection.on("function.create", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    }
 });
 
 connection.on("function.delete", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    }
 });
 
 connection.on("function.update", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    }
 });
 
 connection.on("function.run", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+    }
 });
 
 connection.on("function.read", function (json) {
-    document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1).replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+    }
 });
 
 connection.on("function.readall", function (json) {
-    var functions = JSON.stringify(json).slice(1, -1);
-    document.getElementById("result").innerText = functions.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+    if (document.getElementById("requestType").value == "fafSignalR") {
+        var functions = JSON.stringify(json).slice(1, -1);
+        document.getElementById("result").innerText = functions.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+    }
 });
 
+connection.on()
 
 var settings = {
     Servicename: "",
@@ -40,7 +52,7 @@ var settings = {
 };
 
 var user = {
-    Userid: "00000000-0000-0000-0000-000000000000",//"85c5ced7-bc60-1805-e70d-d7ea8c0ff7c7",
+    Userid: "00000000-0000-0000-0000-000000000000",
     Username: "username",
     Email: "test@test.dk",
     Mobile: "+45 12345678",
@@ -149,11 +161,12 @@ document.getElementById("postButton").addEventListener("click", function (event)
             default:
                 break;
         }
-
+        var hubMethod = document.getElementById("requestType").value == "fafSignalR" ? 'WriteMessage' : 'RPC';
+       
         var data = JSON.stringify(functionDefinitions);
         start();
         var promise = connection.invoke(
-            'WriteMessage',
+            hubMethod, //'WriteMessage',
             "client name",
             "functions." + document.getElementById("operation").value, //route,
             "unique message id defined by the caller", //messageid,
@@ -161,7 +174,13 @@ document.getElementById("postButton").addEventListener("click", function (event)
             emptyGuid, //organisationId
             userContextToken,
             'All') //tracing
+            .then(function (value) {
+                if (document.getElementById("requestType").value == "rpcSignalR") {
+                    HandleResponce(value);
+                }
+            })
             .catch(function (err) {
+                document.getElementById("result").innerText = err.toString();
                 return console.error(err.toString());
             });
     }
@@ -171,6 +190,12 @@ document.getElementById("postButton").addEventListener("click", function (event)
 
     event.preventDefault();
 });
+
+function HandleResponce(responce) {
+    var returnMessageWrapper = JSON.parse(atob(responce));
+    var responceData = atob(returnMessageWrapper.Data).slice(1, -1);
+    document.getElementById("result").innerText = responceData.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
+}
 
 document.getElementById("operation").addEventListener("change", function (event) {
     document.getElementById("function").disabled = document.getElementById("operation").value == "create" || document.getElementById("operation").value == "update" ? false : true;
