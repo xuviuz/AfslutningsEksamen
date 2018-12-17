@@ -333,7 +333,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 directoriesString += directories[i].Remove(0, path.Length).Replace(@"\", " ") + "\r\n";
             }
-
             return directoriesString;
         }
     }
