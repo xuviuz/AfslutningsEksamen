@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 {
-    class FunctionHandler
+    public class FunctionHandler
     {
         private readonly IEnumerable<string> defaultNamespaces;
 
