@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Monosoft.ServerSideFunctions.Service.DTO
 {
-    class FunctionDefinitions
+   public  class FunctionDefinitions
     {
         public string Id { get; set; }
 
