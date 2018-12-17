@@ -50,5 +50,12 @@ namespace Monosoft.ServerSideFunctions.Service
         /// Route information for function read event
         /// </summary>
         public static readonly string RouteFunctionRun = "function.run";
+
+        /// <summary>
+        /// Route information for function * event
+        /// </summary>
+        /// <param name="operation">current operation</param>
+        /// <returns></returns>
+        public static string GetRouteFunction(string operation) => "function." + operation;
     }
 }

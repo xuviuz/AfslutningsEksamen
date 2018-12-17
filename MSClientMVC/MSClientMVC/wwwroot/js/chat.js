@@ -39,7 +39,7 @@ connection.on("function.read", function (json) {
 connection.on("function.readall", function (json) {
     if (document.getElementById("requestType").value == "fafSignalR") {
         var functions = JSON.stringify(json).slice(1, -1);
-        document.getElementById("result").innerText = functions.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n")
+        document.getElementById("result").innerText = functions.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
     }
 });
 
@@ -176,7 +176,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             'All') //tracing
             .then(function (value) {
                 if (document.getElementById("requestType").value == "rpcSignalR") {
-                    HandleResponce(value);
+                    HandleResponse(value);
                 }
             })
             .catch(function (err) {
@@ -191,8 +191,8 @@ document.getElementById("postButton").addEventListener("click", function (event)
     event.preventDefault();
 });
 
-function HandleResponce(responce) {
-    var returnMessageWrapper = JSON.parse(atob(responce));
+function HandleResponse(response) {
+    var returnMessageWrapper = JSON.parse(atob(response));
     var responceData = atob(returnMessageWrapper.Data).slice(1, -1);
     document.getElementById("result").innerText = responceData.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
 }

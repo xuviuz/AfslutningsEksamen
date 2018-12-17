@@ -24,14 +24,12 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
         {
             //CallContext cc = new CallContext(wrapper.OrgContext, new Common.DTO.Token() { Tokenid = wrapper.UserContextToken, Scope = GlobalValues.Scope }, wrapper.IssuedDate);
             var operation = topicparts[1];
-            Common.DTO.EventDTO eventdata = null;
             FunctionHandler functionHandler = new FunctionHandler();
 
             if (true) // cc.IsServerSideFunctionsAdmin
             {
                 if (wrapper.MessageData != null)
                 {
-                    
                     switch (operation)
                     {
                         case "create":
@@ -39,111 +37,44 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                             string createResult = functionHandler.CreateFunction(createFuncDef);
 
-                            eventdata = new Common.DTO.EventDTO(createResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionCreated, eventdata);
+                            return ResponseClient(wrapper, createResult, operation);
 
-                            if (createResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, createResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, createResult);
-                            }
-
-                            break;
                         case "delete":
                             var deleteFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+
                             string deleteResult = functionHandler.DeleteFunction(deleteFuncDef.Name);
 
-                            eventdata = new Common.DTO.EventDTO(deleteResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionDeleted, eventdata);
+                            return ResponseClient(wrapper, deleteResult, operation);
 
-                            if (deleteResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, deleteResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, deleteResult);
-                            }
-
-                            break;
                         case "update":
                             var updateFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string updateResult = functionHandler.UpdateFunction(updateFuncDef);
 
-                            eventdata = new Common.DTO.EventDTO(updateResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionUpdated, eventdata);
+                            return ResponseClient(wrapper, updateResult, operation);
 
-                            if (updateResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, updateResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, updateResult);
-                            }
-
-                            break;
                         case "read":
+                            var readFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            var readFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+                            string readResult = functionHandler.ReadFunction(readFuncDef.Name);
 
-                            string readResult = functionHandler.ReadFunction(readFunc.Name);
+                            return ResponseClient(wrapper, readResult, operation);
 
-                            eventdata = new Common.DTO.EventDTO(readResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRead, eventdata);
-
-                            if (readResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, readResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, readResult);
-                            }
-
-                            break;
                         case "readall":
+                            var readallFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
-                            var readallFunc = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
+                            string readallResult = functionHandler.ReadAllFunctions(readallFuncDef.Name);
 
-                            string readallResult = functionHandler.ReadAllFunctions(readallFunc.Name);
-
-                            eventdata = new Common.DTO.EventDTO(readallResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionReadAll, eventdata);
-
-                            if (readallResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, readallResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, readallResult);
-                            }
-
-
-                            break;
+                            return ResponseClient(wrapper, readallResult, operation);
+                            
                         case "run":
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             object[] parameters = functionHandler.ConvertToObjectArray(runFuncDef.FunctionData);
-                            var operationResult = functionHandler.RunFunction(runFuncDef.Name, parameters);
+                            var runResult = functionHandler.RunFunction(runFuncDef.Name, parameters);
 
-                            eventdata = new Common.DTO.EventDTO(operationResult, wrapper.Clientid, wrapper.Messageid);
-                            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.RouteFunctionRun, eventdata);
+                            return ResponseClient(wrapper, runResult.ToString(), operation);
 
-                            if (operationResult != null)
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, operationResult);
-                            }
-                            else
-                            {
-                                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, operationResult);
-                            }
-                            break;
                         default: /*log error event*/
                             Common.MessageQueue.Diagnostics.Instance.LogEvent("Unknow topic for ServerSideFunctions.", operation + " is unknown", Common.DTO.Severity.Information, System.Guid.Empty);
                             break;
@@ -151,6 +82,21 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 }
             }
             return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "unknown situation" } }, null);
+        }
+
+        private static ReturnMessageWrapper ResponseClient(MessageWrapper wrapper, string result, string operation)
+        {
+            var eventdata = new Common.DTO.EventDTO(result, wrapper.Clientid, wrapper.Messageid);
+            Common.MessageQueue.EventClient.Instance.RaiseEvent(GlobalValues.GetRouteFunction(operation), eventdata);
+
+            if (result != null)
+            {
+                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "OK" } }, result);
+            }
+            else
+            {
+                return ReturnMessageWrapper.CreateResult(true, wrapper, new System.Collections.Generic.List<LocalizedString>() { new LocalizedString() { Lang = "en", Text = "Missing rights" } }, result);
+            }
         }
     }
 }
