@@ -64,13 +64,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "Error while creating " + functionName;
+                string res = "ERROR WHILE CREATING FUNCTION '" + functionName + "'";
                 try
                 {
                     var result = compilation.Emit(pathToEmit);
                     if (result.Success)
                     {
-                        res = functionName + " was created";
+                        res = "FUNCTION '" + functionName + "' WAS CREATED";
 
                         File.WriteAllText(path + functionName + ".json", JsonConvert.SerializeObject(jsonObj));
                     }
@@ -96,8 +96,6 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             {
                 return "FUNCTION '" + functionName + "' ALREADY EXSISTS!";
             }
-
-            
         }
 
         public object RunFunction(string functionName, object[] parameters)
@@ -161,8 +159,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 variables += item[0] + " value" + i.ToString() + " = " + item[1] + ";";
                 returnArray += i == 0 ? item[1] : ", " + item[1];
             }
-            string paramFunctionString = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + 
-                variables + " return new object[] { " + returnArray + " }; } } }";
+            string paramFunctionString = "namespace ConvertParams { public class MyClass { public object[] GetArray() { " + variables + " return new object[] { " + returnArray + " }; } } }";
 
             return GetParametersArray(paramFunctionString);
         }
@@ -209,7 +206,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             Console.WriteLine(res);
             return outputArray;
         }
-     
+
         public string DeleteFunction(string functionName)
         {
             string path = Directory.GetCurrentDirectory() + @"\Dller\" + functionName + @"\";
@@ -219,6 +216,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 Directory.Delete(path, true);
                 return "FUNCTION '" + functionName + "' WAS DELETED!";
             }
+
             return "FUNCTION '" + functionName + "' DOES NOT EXIST!";
         }
 
@@ -233,6 +231,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                 Directory.CreateDirectory(path + functionName + @"BackUps\" + functionName + "BackUp" +  (Directory.GetDirectories(path + functionName + @"BackUps").Count() + 1));
                 string pathForBackUp = path + functionName + @"BackUps\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count()) + @"\" + functionName + "BackUp" + (Directory.GetDirectories(path + functionName + @"BackUps").Count());
 
+
                 string fileName = functionName + "Holder.dll";
                 var pathToEmit = Path.Combine(path, fileName);
 
@@ -240,13 +239,13 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "ERROR WHILE UPDATING '" + functionName + "'";
+                string res = "Error while updating " + functionName;
                 try
                 {
                     var result = compilation.Emit(pathToEmit);
                     if (result.Success)
                     {
-                        res = "FUNCTION '" + functionName + "' WAS UPDATED!";
+                        res = functionName + " was updated!";
 
                         File.Move(path + functionName + ".dll", pathForBackUp + ".dll");
                         File.Move(path + functionName + ".json", pathForBackUp + ".json");
@@ -257,6 +256,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     }
                     else
                     {
+                        Directory.Delete(pathForBackUp);
                         File.Delete(path + functionName + "Holder.dll");
                         IEnumerable<Diagnostic> failures = result.Diagnostics.Where(diagnostic =>
                             diagnostic.IsWarningAsError || diagnostic.Severity == DiagnosticSeverity.Error);

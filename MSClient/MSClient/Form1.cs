@@ -114,9 +114,6 @@ namespace MSClient
 
                 var rmw = Serializer<ReturnMessageWrapper>.GetData(responseBytearray);
 
-                //var myData = Newtonsoft.Json.JsonConvert.DeserializeObject(Encoding.UTF8.GetString(rmw.Data));
-                //form1.textBoxResult.Text = myData.ToString();
-
                 form1.textBoxResult.Text = Serializer<string>.GetData(rmw.Data);
             }
             catch (Exception ex)
