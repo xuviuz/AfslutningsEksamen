@@ -239,7 +239,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
                 var compilation = CSharpCompilation.Create(fileName, new SyntaxTree[] { syntaxTree }, defaultReferences, options);
 
-                string res = "Error while updating " + functionName;
+                string res = "ERROR WHILE UPDATING FUNCTION " + functionName;
                 try
                 {
                     var result = compilation.Emit(pathToEmit);
