@@ -26,7 +26,8 @@ connection.on("function.update", function (json) {
 
 connection.on("function.run", function (json) {
     if (document.getElementById("requestType").value == "fafSignalR") {
-        document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
+        var result = JSON.stringify(json).slice(1, -1);
+        document.getElementById("result").innerText = result.replace(/(?:\\[rn]|[\r\n]+)+/g, "\n");
     }
 });
 

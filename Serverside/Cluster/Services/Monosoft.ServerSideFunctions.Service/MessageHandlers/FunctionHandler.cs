@@ -146,7 +146,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
 
         public object[] ConvertToObjectArray(string inputString)
         {
-            if (string.IsNullOrEmpty(inputString.Replace(" ", "")) || !inputString.Contains(":"))
+            if (string.IsNullOrEmpty(inputString.Replace(" ", "")))
             {
                 return new object[] { };
             }
@@ -155,6 +155,10 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
             string returnArray = string.Empty;
             for (int i = 0; i < tempArray.Length; i++)
             {
+                if (!tempArray[i].Contains(":"))
+                {
+                    return null;
+                }
                 string[] item = tempArray[i].Split(":");
                 variables += item[0] + " value" + i.ToString() + " = " + item[1] + ";";
                 returnArray += i == 0 ? item[1] : ", " + item[1];
@@ -201,6 +205,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                     {
                         Console.Error.WriteLine("\t{0}: {1}", diagnostic.Id, diagnostic.GetMessage());
                     }
+                    outputArray = null;
                 }
             }
             Console.WriteLine(res);

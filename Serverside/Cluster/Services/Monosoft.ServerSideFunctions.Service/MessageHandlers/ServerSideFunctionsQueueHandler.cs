@@ -71,6 +71,10 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var runFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             object[] parameters = functionHandler.ConvertToObjectArray(runFuncDef.FunctionData);
+                            if (parameters == null)
+                            {
+                                return ResponseClient(wrapper, "WRONG INPUT DATA", operation);
+                            }
                             var runResult = functionHandler.RunFunction(runFuncDef.Name, parameters);
 
                             return ResponseClient(wrapper, runResult.ToString(), operation);
