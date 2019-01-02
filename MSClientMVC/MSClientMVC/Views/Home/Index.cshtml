@@ -11,7 +11,7 @@
             <table style="width:100%">
                 <tr>
                     <td>
-                        <input type="text" id="id" style="width:300px;" />
+                        <input type="text" id="id" style="width:300px" />
                         <label> ID</label>
                         <br />
                         <br />
@@ -23,9 +23,14 @@
                         <label> Parameters</label>
                     </td>
                     <td style="width:50%">
+                        <input type="text" id="link" style="width:90%; background-color:yellow; color:darkblue" />
+                        <br/>
+                        <br/>
                         <select id="requestType" style="width:150px;height:40px">
                             <option value="fafSignalR">FAF (SignalR)</option>
                             <option value="rpcSignalR">RPC (SignalR)</option>
+                            <option value="fafHttp">FAF (Http)</option>
+                            <option value="rpcHttp">RPC (Http)</option>
                         </select>
                     </td>
                 </tr>
@@ -34,13 +39,13 @@
                 </tr>
                 <tr>
                     <td style="width:50%">
-                        <label class="badge badge-info">FUNCTION</label>
+                        <span class="label label-success">FUNCTION</span>
                         <br />
                         <textarea id="function" style="width:90%; height:300px; white-space:pre; overflow-x:auto;"></textarea>
                         <br />
                     </td>
                     <td style="width:50%">
-                        <label class="badge badge-info">RESULT</label>
+                        <span class="label label-warning">RESULT</span>
                         <br />
                         <textarea id="result" style="width:90%; height:300px; white-space:pre; overflow-x:auto;" readonly></textarea>
                         <br />
@@ -64,7 +69,10 @@
                         </select>
                     </td>
                     <td style="width:50%">
-                        <input type="button" id="postButton" value="POST" style="height:40px;width:120px;float:right;margin-right:50px" class="btn-primary"/>
+                        <input type="button" id="postButton" value="POST" style="height:40px; width:120px; float:right; margin-right:50px" class="btn-primary" />
+                        <div id="spinner" style="display:none">
+                            <img src="~/images/processing.gif" alt="processing" style="width:40%; height:40px; float:left; margin-right:30px" />
+                        </div>
                     </td>
                 </tr>
             </table>
