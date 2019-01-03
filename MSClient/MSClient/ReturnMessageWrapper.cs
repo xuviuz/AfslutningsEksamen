@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MSClient
 {
+    /// <summary>
+    /// Wrapper for return messages
+    /// </summary>
     class ReturnMessageWrapper
     {
         /// <summary>

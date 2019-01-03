@@ -2,12 +2,16 @@
 
 namespace MSClient
 {
+    /// <summary>
+    /// Represents class for encoding/decoding data
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     class Serializer<T>
     {
         /// <summary>
-        /// Get decoded data from the message wrapper
+        /// Get decoded data from encoded byte array
         /// </summary>
-        /// <param name="wrapper">message wrapper</param>
+        /// <param name="wrapper">encoded byte array</param>
         /// <returns>decoded data</returns>
         public static T GetData(byte[] tempData)
         {
