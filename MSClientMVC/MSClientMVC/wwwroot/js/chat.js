@@ -7,6 +7,7 @@ $(document).ready(function () {
     document.getElementById("link").value = signalRLink;
 });
 
+//Creates a connection with hub
 var connection = new signalR.HubConnectionBuilder().withUrl(signalRLink).build();
 connection.start().catch(function (err) {
     document.getElementById("result").innerText = err.toString();
@@ -14,6 +15,9 @@ connection.start().catch(function (err) {
     return console.error(err.toString());
 });
 
+//Here we make register handlers that will be invoked when the hub metod with the specefic name is called.
+//They keep control over the data that is recived, and in what format.
+//This is the same for each "connection.on"
 connection.on("function.create", function (json) {
     if (document.getElementById("requestType").value == "fafSignalR" || document.getElementById("requestType").value == "fafHttp") {
         document.getElementById("result").innerText = JSON.stringify(json).slice(1, -1);
@@ -59,10 +63,13 @@ connection.on("function.readall", function (json) {
 });
 
 var userContextToken = '00000000-0000-0000-0000-000000000000';
-var emptyGuid = '00000000-0000-0000-0000-000000000000';
+var emptyGuid = '00000000-0000-0000-0000-000000000000'; 
 
 var startTime, endTime;
 
+/*
+ *Calculates startup time together with end()
+ */
 function start() {
     startTime = new Date();
 };
@@ -73,10 +80,19 @@ function end() {
     console.log(Math.round(timeDiff) + " ms");
 }
 
+/*
+ * Checks to make sure that our input fields are not empty
+ */
 function isNotEmpty(val) {
     return ((val !== '') && (val !== undefined) && (val.length > 0) && (val !== null));
 }
 
+/*
+ * Handles button POST click events.
+ * 
+ * Switch case makes sure to send the data the correct way to the server.
+ * With the appropriate data with checks if there is empty input fields.
+ */
 document.getElementById("postButton").addEventListener("click", function (event) {
     document.getElementById("result").innerText = "";
     document.getElementById("result").style.background = "#ffffff";
@@ -173,6 +189,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
         
         if (connection) {
             start();
+            //Request to hub
             var promise = connection.invoke(
                 hubMethod, //'WriteMessage',
                 "client name",
@@ -184,6 +201,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
                 'All') //tracing
                 .then((value) => {
                     if (document.getElementById("requestType").value == "rpcSignalR") {
+                        //Handles response from hub
                         HandleResponse(value);
                     }
                 })
@@ -202,6 +220,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
         }
     }
     else {
+        //User data gets filled out
         var user1 = {
             scope: "clinetname",
             route: "functions." + document.getElementById("operation").value,
@@ -212,7 +231,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
             tracing: "All"
         };
         start();
-
+        //sends HTTP request as an asynchronous operation
         var jqxhr = $.ajax({
             type: "POST",
             data: JSON.stringify(user1),
@@ -236,6 +255,7 @@ document.getElementById("postButton").addEventListener("click", function (event)
     event.preventDefault();
 });
 
+//Converts binary data from base-64 digits to string and prints to screen
 function HandleResponse(response) {
     var returnMessageWrapper = JSON.parse(atob(response));
     var responceData = atob(returnMessageWrapper.Data).slice(1, -1);
@@ -248,6 +268,7 @@ document.getElementById("operation").addEventListener("change", function (event)
     document.getElementById("parameters").disabled = document.getElementById("operation").value == "run" ? false : true;
 });
 
+//Handles the way to send data
 document.getElementById("requestType").addEventListener("change", function (event) {
     switch (document.getElementById("requestType").value) {
         case "fafHttp":

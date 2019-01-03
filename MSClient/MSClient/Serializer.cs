@@ -9,7 +9,7 @@ namespace MSClient
     class Serializer<T>
     {
         /// <summary>
-        /// Get decoded data from encoded byte array
+        /// Get decoded data from encoded byte array. Which is a JSON object compiled into bytes
         /// </summary>
         /// <param name="wrapper">encoded byte array</param>
         /// <returns>decoded data</returns>

@@ -1,0 +1,14 @@
+I denne mappe ligger der 2 mapper.
+Alt det som der er i "VORES" er det kode som kun vi har lavet, mens det der ligger i "FÆLLES" også er det som Monosoft har lavet.
+For at få vores program til at fungere skal man dog bruge mappen "FÆLLES".
+
+I vores rapport er der under billag en forklareing omkring hvad for nogle filer man skal åbne for at køre programmet
+og hvordan det er at man bruger det.
+
+OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! 
+
+Hvis programmet ikke vil fungere/sende data kan det være fordi at du skal installere RabbitMQ på din pc
+Dette gøres ved at først downloade og installere Erlang: http://www.erlang.org/downloads 
+Og derefter download og installere RabbitMQ: http://www.rabbitmq.com/install-windows.html
+
+OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! OBS!! 

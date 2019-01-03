@@ -17,7 +17,7 @@ namespace MSClient
         public string Route { get; set; }
 
         /// <summary>
-        /// Gets and sets
+        /// Gets and sets message id
         /// </summary>
         public string Messageid { get; set; }
 
