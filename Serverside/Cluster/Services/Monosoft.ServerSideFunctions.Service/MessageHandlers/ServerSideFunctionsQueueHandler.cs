@@ -36,7 +36,7 @@ namespace Monosoft.ServerSideFunctions.Service.MessageHandlers
                             var createFuncDef = Common.DTO.MessageWrapperHelper<DTO.FunctionDefinitions>.GetData(wrapper);
 
                             string createResult = functionHandler.CreateFunction(createFuncDef);
-
+                            
                             return ResponseClient(wrapper, createResult, operation);
 
                         case "delete":
